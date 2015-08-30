@@ -26,15 +26,10 @@ public class QuitListener extends MyListener {
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		HPlayer player = HPlayer.o(p);
-		if (Rank.isPermissible(player, Rank.Master, false) && !UtilVanish.getVanished(p)) {
-			e.setQuitMessage(ChatColor.BLUE + "Quit: "
-					+ player.getRank().getLabel(true, true) + ChatColor.GRAY
-					+ " " + p.getName());
-		} else {
-			e.setQuitMessage(null);
-		}
 		TimeOnline.uploadToDatabase(p);
 		TimeOnline.setOffline(p);
+
+		e.setQuitMessage(null);
 
 		long millis = System.currentTimeMillis();
 

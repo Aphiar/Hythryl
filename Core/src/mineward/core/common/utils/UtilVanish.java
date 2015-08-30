@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,6 +84,16 @@ public class UtilVanish extends MyListener implements Listener {
         for (Player onlinep : Bukkit.getOnlinePlayers()) {
             if (getVanished(onlinep)) {
                 p.hidePlayer(onlinep);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        if (getVanished(p)) {
+            for (Player onlinep : Bukkit.getOnlinePlayers()) {
+                onlinep.showPlayer(p);
             }
         }
     }

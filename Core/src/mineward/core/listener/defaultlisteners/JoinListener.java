@@ -74,13 +74,7 @@ public class JoinListener extends MyListener {
 		}
 		HPlayer player = HPlayer.a(p);
 		Core.AddPlayer(player);
-		if (Rank.isPermissible(player, Rank.Master, false) && !UtilVanish.getVanished(p)) {
-			e.setJoinMessage(ChatColor.BLUE + "Join: "
-					+ player.getRank().getLabel(true, true) + ChatColor.GRAY
-					+ " " + p.getName());
-		} else {
-			e.setJoinMessage(null);
-		}
+		e.setJoinMessage(null);
 		TimeOnline.setOnline(p, System.currentTimeMillis());
 		new JoinAchievement().Complete(p, true);
 		for (Player pl : Bukkit.getOnlinePlayers()) {
