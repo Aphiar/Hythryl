@@ -154,13 +154,24 @@ public class StatsGUI extends MyListener {
 				"Head of Support, Forums Nerd.",
 				"Community Management & Flounder." }, UtilItem
 				.GetSkull("GUNZxNxROSEZ"), 10));
-		gui.AddButton(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
-				+ "Will", new String[] { "A rapper who raps about ",
+		// Will
+		gui.AddButton(new Button(null, ChatColor.DARK_RED + "" + ChatColor.BOLD
+				+ "Will", new String[] { "Community Manager",
+				"A rapper who raps about ",
 				"wrapping wraps. Not a wrapper." }, UtilItem.GetSkull("Will"),
 				18));
+		// FelixT
 		gui.AddButton(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
 				+ "FelixT", new String[] { "Some kid." }, UtilItem
 				.GetSkull("FelixT"), 19));
+		// SirRegan
+		gui.AddButton(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
+				+ "SirRegan", new String[] { "Another random kid" }, UtilItem
+		.GetSkull("SirRegan"), 27));
+		// InstanceOfDev
+		gui.AddButton(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
+				+ "InstanceOfDev", new String[] { "Pudding Lover",
+				"Developer and sick kid"}, UtilItem.GetSkull("InstanceOfDev"), 28));
 
 		gui.show(viewer);
 	}
