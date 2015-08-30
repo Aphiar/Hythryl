@@ -4,7 +4,6 @@ import mineward.core.command.MyCommand;
 import mineward.core.common.Rank;
 import mineward.core.common.utils.C;
 import mineward.core.common.utils.F;
-import org.bukkit.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -25,7 +24,7 @@ public class TPCMD extends MyCommand {
             p.teleport(target);
             F.message(p, "Teleport", "Teleported to " + C.STR_PLAYER + args[0]);
         } else {
-            p.sendMessage(ChatColor.RED + "Player not online!");
+            F.message(p, "Teleport", "Player not online!");
         }
     }
 }
