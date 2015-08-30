@@ -37,6 +37,7 @@ import mineward.core.scoreboard.SBManager;
 import mineward.core.stats.StatsCMD;
 import mineward.core.stats.StatsGUI;
 import mineward.core.teleportation.TPCMD;
+import mineward.core.teleportation.TPHereCMD;
 import mineward.core.we.BlockProtect;
 
 import org.bukkit.Bukkit;
@@ -92,6 +93,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterListener(new WeatherListener(), this);
 		MyFactory.RegisterListener(new BlockProtect(), this);
 		MyFactory.RegisterCommand(new TPCMD(), this);
+		MyFactory.RegisterCommand(new TPHereCMD(), this);
 
 		AddAchievements();
 
