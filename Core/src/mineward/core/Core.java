@@ -36,6 +36,7 @@ import mineward.core.purchases.CoinCCMD;
 import mineward.core.scoreboard.SBManager;
 import mineward.core.stats.StatsCMD;
 import mineward.core.stats.StatsGUI;
+import mineward.core.teleportation.TPCMD;
 import mineward.core.we.BlockProtect;
 
 import org.bukkit.Bukkit;
@@ -90,6 +91,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterListener(new StatsGUI(), this);
 		MyFactory.RegisterListener(new WeatherListener(), this);
 		MyFactory.RegisterListener(new BlockProtect(), this);
+		MyFactory.RegisterCommand(new TPCMD(), this);
 
 		AddAchievements();
 
@@ -97,7 +99,7 @@ public class Core extends JavaPlugin {
 
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			TimeOnline.setOnline(p, now);
-			p.setCustomName("§7" + p.getName());
+			p.setCustomName(ChatColor.translateAlternateColorCodes('&', "&7" + p.getName()));
 			SBManager.getScoreboard(p);
 			for (Player pl : Bukkit.getOnlinePlayers()) {
 				Rank rank = HPlayer.o(pl).getRank();
