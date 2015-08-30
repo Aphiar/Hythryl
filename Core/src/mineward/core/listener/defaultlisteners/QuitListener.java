@@ -6,6 +6,7 @@ import mineward.core.Core;
 import mineward.core.achievement.time.TimeOnline;
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
+import mineward.core.common.utils.UtilVanish;
 import mineward.core.listener.MyListener;
 import mineward.core.player.HPlayer;
 import mineward.core.scoreboard.SBManager;
@@ -25,7 +26,7 @@ public class QuitListener extends MyListener {
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		HPlayer player = HPlayer.o(p);
-		if (Rank.isPermissible(player, Rank.Master, false)) {
+		if (Rank.isPermissible(player, Rank.Master, false) && !UtilVanish.getVanished(p)) {
 			e.setQuitMessage(ChatColor.BLUE + "Quit: "
 					+ player.getRank().getLabel(true, true) + ChatColor.GRAY
 					+ " " + p.getName());

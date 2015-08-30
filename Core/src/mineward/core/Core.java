@@ -17,6 +17,7 @@ import mineward.core.chat.StaffChatCMD;
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
 import mineward.core.common.SubPlugin;
+import mineward.core.common.utils.UtilVanish;
 import mineward.core.fun.FartCMD;
 import mineward.core.hierarchy.ClassCMD;
 import mineward.core.hierarchy.PromoteCMD;
@@ -26,6 +27,7 @@ import mineward.core.listener.defaultlisteners.ChatListener;
 import mineward.core.listener.defaultlisteners.JoinListener;
 import mineward.core.listener.defaultlisteners.QuitListener;
 import mineward.core.listener.defaultlisteners.WeatherListener;
+import mineward.core.moderation.VanishCMD;
 import mineward.core.player.HPlayer;
 import mineward.core.punish.Punish;
 import mineward.core.punish.PunishCMD;
@@ -94,6 +96,8 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterListener(new BlockProtect(), this);
 		MyFactory.RegisterCommand(new TPCMD(), this);
 		MyFactory.RegisterCommand(new TPHereCMD(), this);
+		MyFactory.RegisterCommand(new VanishCMD(), this);
+		MyFactory.RegisterListener(new UtilVanish(), this);
 
 		AddAchievements();
 

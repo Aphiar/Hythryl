@@ -8,6 +8,7 @@ import mineward.core.achievement.time.TimeOnline;
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
 import mineward.core.common.database.account.AccountManager;
+import mineward.core.common.utils.UtilVanish;
 import mineward.core.listener.MyListener;
 import mineward.core.listener.custom.SuccessfulJoinEvent;
 import mineward.core.player.HPlayer;
@@ -73,7 +74,7 @@ public class JoinListener extends MyListener {
 		}
 		HPlayer player = HPlayer.a(p);
 		Core.AddPlayer(player);
-		if (Rank.isPermissible(player, Rank.Master, false)) {
+		if (Rank.isPermissible(player, Rank.Master, false) && !UtilVanish.getVanished(p)) {
 			e.setJoinMessage(ChatColor.BLUE + "Join: "
 					+ player.getRank().getLabel(true, true) + ChatColor.GRAY
 					+ " " + p.getName());
