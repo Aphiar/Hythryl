@@ -8,7 +8,6 @@ import mineward.core.achievement.time.TimeOnline;
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
 import mineward.core.common.database.account.AccountManager;
-import mineward.core.common.utils.UtilVanish;
 import mineward.core.listener.MyListener;
 import mineward.core.listener.custom.SuccessfulJoinEvent;
 import mineward.core.player.HPlayer;
