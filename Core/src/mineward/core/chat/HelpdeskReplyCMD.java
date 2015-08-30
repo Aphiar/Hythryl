@@ -20,7 +20,7 @@ public class HelpdeskReplyCMD extends MyCommand {
 	@Override
 	public void execute(Player p, String[] args) {
 		if (args == null || args.length < 2) {
-			F.help(p, "hr <player> <message>", "Reply to a helpdesh request",
+			F.help(p, "hr <player> <message>", "Reply to a helpdesk request",
 					Rank.Jrmod);
 		} else {
 			try {
