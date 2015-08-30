@@ -27,6 +27,7 @@ import mineward.core.listener.defaultlisteners.ChatListener;
 import mineward.core.listener.defaultlisteners.JoinListener;
 import mineward.core.listener.defaultlisteners.QuitListener;
 import mineward.core.listener.defaultlisteners.WeatherListener;
+import mineward.core.moderation.GamemodeCMD;
 import mineward.core.moderation.VanishCMD;
 import mineward.core.player.HPlayer;
 import mineward.core.punish.Punish;
@@ -98,6 +99,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new TPHereCMD(), this);
 		MyFactory.RegisterCommand(new VanishCMD(), this);
 		MyFactory.RegisterListener(new UtilVanish(), this);
+		MyFactory.RegisterCommand(new GamemodeCMD(), this);
 
 		AddAchievements();
 

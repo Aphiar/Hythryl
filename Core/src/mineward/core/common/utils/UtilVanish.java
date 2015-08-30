@@ -87,14 +87,4 @@ public class UtilVanish extends MyListener implements Listener {
             }
         }
     }
-
-    @EventHandler
-    public void onQuit(PlayerQuitEvent e) {
-        Player p = e.getPlayer();
-        if (getVanished(p)) {
-            for (Player onlinep : Bukkit.getOnlinePlayers()) {
-                onlinep.showPlayer(p);
-            }
-        }
-    }
 }
