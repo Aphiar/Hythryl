@@ -47,7 +47,7 @@ public class Punish {
 				+ ChatColor.AQUA + "" + ChatColor.BOLD + "." + "\n\n"
 				+ ChatColor.GREEN
 				+ "To reverse this action, you may appeal at " + ChatColor.AQUA
-				+ "" + ChatColor.UNDERLINE + "www.hythryl.com/appeal"
+				+ "" + ChatColor.UNDERLINE + "www.hythryl.net/appeal"
 				+ ChatColor.GREEN + ".";
 	}
 
