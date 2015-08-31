@@ -2,14 +2,12 @@ package mineward.core.listener.defaultlisteners;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import mineward.core.achievement.general.ChatAchievement;
 import mineward.core.common.Prefix.PrefixColor;
 import mineward.core.common.Rank;
-import mineward.core.common.utils.C;
-import mineward.core.common.utils.F;
-import mineward.core.common.utils.TimeUtil;
-import mineward.core.common.utils.UtilLevel;
+import mineward.core.common.utils.*;
 import mineward.core.listener.MyListener;
 import mineward.core.player.HPlayer;
 import mineward.core.punish.Punish;
@@ -75,6 +73,23 @@ public class ChatListener extends MyListener {
 					+ C.STR_ELEMENT + time + C.STR_MAIN + " because you were "
 					+ C.STR_ELEMENT + pun.reason);
 			return;
+		}
+
+		ArrayList<String> bannedwords = UtilFilter.getBannedWords();
+
+		for (String words : bannedwords) {
+			boolean is  = Pattern.compile(Pattern.quote(words), 2).matcher(msg).find();
+			if (is && !HPlayer.o(p).getRank().isPermissible(Rank.Admin)) {
+				e.setCancelled(true);
+				F.message(p, "Chat", "Please do not swear! Online staff have been notified of your actions!");
+				for (Player onlinep : Bukkit.getOnlinePlayers()) {
+					HPlayer onlinehp = HPlayer.o(onlinep);
+					if (onlinehp.getRank().isPermissible(Rank.Jrmod)) {
+						F.message(onlinehp.getPlayer(), "Chat", "Player " + C.STR_PLAYER + p.getName() + C.STR_MAIN + " has sworn! Word used: " + C.STR_PLAYER + words );
+					}
+				}
+				return;
+			}
 		}
 		msg = msg.replace("%", "%%");
 		if (msg.toUpperCase().startsWith("SIRI")) {
