@@ -65,9 +65,9 @@ public class JoinListener extends MyListener {
 					+ "Welcome to Hythryl, a new Minecraft Minigames Server.");
 			p.sendMessage("");
 			p.sendMessage("Website: " + ChatColor.GREEN + ""
-					+ ChatColor.UNDERLINE + "www.hythryl.com");
+					+ ChatColor.UNDERLINE + "www.hythryl.net");
 			p.sendMessage("Rules: " + ChatColor.GREEN + ""
-					+ ChatColor.UNDERLINE + "www.hythryl.com/rules");
+					+ ChatColor.UNDERLINE + "www.hythryl.net/rules");
 			p.sendMessage("");
 			AccountManager.getAccount(p.getUniqueId().toString(), true);
 		}
