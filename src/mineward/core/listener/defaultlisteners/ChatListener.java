@@ -79,18 +79,11 @@ public class ChatListener extends MyListener {
 
 		for (String words : bannedwords) {
 			boolean is  = Pattern.compile(Pattern.quote(words), 2).matcher(msg).find();
-			if (is && !HPlayer.o(p).getRank().isPermissible(Rank.Admin)) {
 				e.setCancelled(true);
-				F.message(p, "Chat", "Please do not swear! Online staff have been notified of your actions!");
-				for (Player onlinep : Bukkit.getOnlinePlayers()) {
-					HPlayer onlinehp = HPlayer.o(onlinep);
-					if (onlinehp.getRank().isPermissible(Rank.Jrmod)) {
-						F.message(onlinehp.getPlayer(), "Chat", "Player " + C.STR_PLAYER + p.getName() + C.STR_MAIN + " has sworn! Word used: " + C.STR_PLAYER + words );
-					}
-				}
+				F.message(p, "Chat", "Please do not swear! It is against the rules!");
 				return;
-			}
 		}
+
 		msg = msg.replace("%", "%%");
 		if (msg.toUpperCase().startsWith("SIRI")) {
 			HythrylBot.Siri(p, msg);
