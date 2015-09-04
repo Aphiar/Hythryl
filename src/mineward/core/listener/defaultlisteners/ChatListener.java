@@ -78,10 +78,11 @@ public class ChatListener extends MyListener {
 		ArrayList<String> bannedwords = UtilFilter.getBannedWords();
 
 		for (String words : bannedwords) {
-			boolean is  = Pattern.compile(Pattern.quote(words), 2).matcher(msg).find();
+			if (msg.contains(words)) {
 				e.setCancelled(true);
 				F.message(p, "Chat", "Please do not swear! It is against the rules!");
 				return;
+			}
 		}
 
 		msg = msg.replace("%", "%%");

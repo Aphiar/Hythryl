@@ -15,7 +15,7 @@ public class UtilFilter {
             PreparedStatement statement = Database.getConnection().prepareStatement("SELECT * FROM Filter");
 
             ResultSet res = statement.executeQuery();
-            if (res.next()) {
+            while (res.next()) {
                 words.add(res.getString("word"));
             }
         } catch (SQLException ex) {

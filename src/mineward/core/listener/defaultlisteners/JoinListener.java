@@ -49,7 +49,7 @@ public class JoinListener extends MyListener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
-		p.setCustomName("§7" + p.getName());
+		p.setCustomName(ChatColor.GRAY + p.getName());
 		if (Database.isConnectionLost()) {
 			e.setJoinMessage(null);
 			p.sendMessage("No database connection. Reloading...");
@@ -93,9 +93,9 @@ public class JoinListener extends MyListener {
 		}
 
 		IChatBaseComponent header = ChatSerializer
-				.a("{text:\"§6§lHythryl Network\"}");
+				.a(ChatColor.translateAlternateColorCodes('&', "{text:\"&6&lHythryl Network\"}"));
 		IChatBaseComponent footer = ChatSerializer
-				.a("{text:\"You're playing on §bplay.hythryl.net\n§fWebsite: §awww.hythryl.net\"}");
+				.a(ChatColor.translateAlternateColorCodes('&', "{text:\"You're playing on &bplay.hythryl.net\n&fWebsite: &awww.hythryl.net\"}"));
 		PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter(
 				header);
 		try {

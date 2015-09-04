@@ -109,7 +109,7 @@ public class Core extends JavaPlugin {
 
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			TimeOnline.setOnline(p, now);
-			p.setCustomName(ChatColor.translateAlternateColorCodes('&', "&7" + p.getName()));
+			p.setCustomName(ChatColor.GRAY + p.getName());
 			SBManager.getScoreboard(p);
 			for (Player pl : Bukkit.getOnlinePlayers()) {
 				Rank rank = HPlayer.o(pl).getRank();
