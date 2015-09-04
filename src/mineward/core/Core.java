@@ -39,6 +39,7 @@ import mineward.core.purchases.CoinCCMD;
 import mineward.core.scoreboard.SBManager;
 import mineward.core.stats.StatsCMD;
 import mineward.core.stats.StatsGUI;
+import mineward.core.teleportation.TPAllCMD;
 import mineward.core.teleportation.TPCMD;
 import mineward.core.teleportation.TPHereCMD;
 import mineward.core.we.BlockProtect;
@@ -100,6 +101,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new VanishCMD(), this);
 		MyFactory.RegisterListener(new UtilVanish(), this);
 		MyFactory.RegisterCommand(new GamemodeCMD(), this);
+		MyFactory.RegisterCommand(new TPAllCMD(), this);
 
 		AddAchievements();
 
