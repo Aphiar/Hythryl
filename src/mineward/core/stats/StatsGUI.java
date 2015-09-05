@@ -14,6 +14,7 @@ import mineward.core.achievement.GameAchievement;
 import mineward.core.achievement.time.TimeOnline;
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
+import mineward.core.common.database.account.AccountManager;
 import mineward.core.common.utils.TimeUtil;
 import mineward.core.common.utils.UtilItem;
 import mineward.core.common.utils.UtilLevel;
@@ -157,9 +158,8 @@ public class StatsGUI extends MyListener {
 		// Will
 		gui.AddButton(new Button(null, ChatColor.DARK_RED + "" + ChatColor.BOLD
 				+ "Will", new String[] { "Community Manager",
-				"A rapper who raps about ",
-				"wrapping wraps. Not a wrapper." }, UtilItem.GetSkull("Will"),
-				18));
+				"A rapper who raps about ", "wrapping wraps. Not a wrapper." },
+				UtilItem.GetSkull("Will"), 18));
 		// FelixT
 		gui.AddButton(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
 				+ "FelixT", new String[] { "Some kid." }, UtilItem
@@ -167,11 +167,12 @@ public class StatsGUI extends MyListener {
 		// SirRegan
 		gui.AddButton(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
 				+ "SirRegan", new String[] { "Another random kid" }, UtilItem
-		.GetSkull("SirRegan"), 27));
+				.GetSkull("SirRegan"), 27));
 		// InstanceOfDev
 		gui.AddButton(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
 				+ "InstanceOfDev", new String[] { "Pudding Lover",
-				"Developer and sick kid"}, UtilItem.GetSkull("InstanceOfDev"), 28));
+				"Developer and sick kid" }, UtilItem.GetSkull("InstanceOfDev"),
+				28));
 
 		gui.show(viewer);
 	}
@@ -250,6 +251,15 @@ public class StatsGUI extends MyListener {
 			while (rs.next()) {
 				long d = rs.getLong(data);
 				UUID id = UUID.fromString(rs.getString("uuid"));
+				if (Bukkit.getOfflinePlayer(id).isOnline()) {
+					if (HPlayer.o(Bukkit.getPlayer(id)).getRank()
+							.isPermissible(Rank.Admin))
+						continue;
+				} else {
+					if (AccountManager.getAccount(id.toString(), false).rank
+							.isPermissible(Rank.Admin))
+						continue;
+				}
 				if (highest) {
 					if (d > one) {
 						three = two;
