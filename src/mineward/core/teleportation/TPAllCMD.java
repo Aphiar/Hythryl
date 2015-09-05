@@ -15,7 +15,7 @@ public class TPAllCMD extends MyCommand {
     public void execute(Player p, String[] args) {
         for (Player onlinep : Bukkit.getOnlinePlayers()) {
             onlinep.teleport(p);
-            F.message(p, "Teleport", "Teleported all players to you!");
         }
+        F.message(p, "Teleport", "Teleported all players to you!");
     }
 }
