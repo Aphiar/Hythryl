@@ -9,7 +9,7 @@ import org.bukkit.ChatColor;
 public enum Rank {
 
 	Owner(ChatColor.DARK_RED, "Owner", 100.0D), // Ordinal of 0
-	CM(ChatColor.DARK_RED, "CM", 99.0D),
+	CM(ChatColor.YELLOW, "VIP", 99.0D),
 	Dev(ChatColor.RED, "Dev", 26.0D), 
 	Admin(ChatColor.RED, "Admin", 25.0D), 
 	Coolkid(ChatColor.DARK_AQUA, "CoolKid", 17.0D),
