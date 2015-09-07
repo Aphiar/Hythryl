@@ -18,6 +18,7 @@ import mineward.core.common.Database;
 import mineward.core.common.Rank;
 import mineward.core.common.SubPlugin;
 import mineward.core.common.utils.UtilVanish;
+import mineward.core.console.SendMessageCMD;
 import mineward.core.fun.FartCMD;
 import mineward.core.hierarchy.ClassCMD;
 import mineward.core.hierarchy.PromoteCMD;
@@ -107,6 +108,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new TPAllCMD(), this);
 
 		MyFactory.RegisterListener(new NPCBinder(), this);
+		MyFactory.RegisterCommand(new SendMessageCMD(), this);
 
 		AddAchievements();
 

@@ -38,11 +38,8 @@ public class NPCBinder extends MyListener {
 			String cmd = ToBind.get(p.getUniqueId());
 			net.minecraft.server.v1_8_R3.Entity en = ((CraftEntity) ent)
 					.getHandle();
-			NBTTagCompound tag = en.getNBTTag();
-			if (tag == null) {
-				tag = new NBTTagCompound();
-				en.c(tag);
-			}
+			NBTTagCompound tag = new NBTTagCompound();
+			en.c(tag);
 			tag.setString("CommandBind", cmd);
 			en.f(tag);
 			p.sendMessage(ChatColor.GREEN + "Successfully bound command " + cmd
@@ -53,7 +50,8 @@ public class NPCBinder extends MyListener {
 		}
 		net.minecraft.server.v1_8_R3.Entity en = ((CraftEntity) ent)
 				.getHandle();
-		NBTTagCompound tag = en.getNBTTag();
+		NBTTagCompound tag = new NBTTagCompound();
+		en.c(tag);
 		String cmd = tag.getString("CommandBind");
 		if (cmd == null)
 			return;
