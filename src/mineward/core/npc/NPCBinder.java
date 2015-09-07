@@ -63,6 +63,8 @@ public class NPCBinder extends MyListener {
 		String cmd = null;
 		if (ent.getPassenger() == null) {
 			for (Entity ne : ent.getNearbyEntities(1, 1, 1)) {
+				if (!(ne.getCustomName().contains("§;")))
+					continue;
 				if (ne.getLocation().getX() == ent.getLocation().getX()
 						&& ne.getLocation().getY() == ent.getLocation().getY()
 						&& ne.getLocation().getZ() == ent.getLocation().getZ()
