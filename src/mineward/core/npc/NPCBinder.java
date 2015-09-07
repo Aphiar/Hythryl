@@ -39,18 +39,27 @@ public class NPCBinder extends MyListener {
 			net.minecraft.server.v1_8_R3.Entity en = ((CraftEntity) ent)
 					.getHandle();
 			NBTTagCompound tag = en.getNBTTag();
+			if (tag == null) {
+				tag = new NBTTagCompound();
+				en.c(tag);
+			}
 			tag.setString("CommandBind", cmd);
 			en.f(tag);
 			p.sendMessage(ChatColor.GREEN + "Successfully bound command " + cmd
 					+ " to entity.");
 			ToBind.remove(p.getUniqueId());
+			e.setCancelled(true);
 			return;
 		}
 		net.minecraft.server.v1_8_R3.Entity en = ((CraftEntity) ent)
 				.getHandle();
 		NBTTagCompound tag = en.getNBTTag();
 		String cmd = tag.getString("CommandBind");
-		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), cmd);
+		if (cmd == null)
+			return;
+		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
+				cmd.replace("{p}", p.getName()));
+		e.setCancelled(true);
 	}
 
 }
