@@ -3,6 +3,7 @@ package mineward.core.console;
 import mineward.core.command.ConsoleCommand;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 
 public class SendMessageCMD extends ConsoleCommand {
@@ -21,6 +22,7 @@ public class SendMessageCMD extends ConsoleCommand {
 				msg += args[i];
 			}
 			msg += args[args.length - 1];
+			msg = ChatColor.translateAlternateColorCodes('&', msg);
 			Bukkit.getPlayer(args[0]).sendMessage(msg);
 		} catch (Exception e) {
 			return;

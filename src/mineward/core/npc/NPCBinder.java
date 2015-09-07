@@ -40,10 +40,10 @@ public class NPCBinder extends MyListener {
 					.getHandle();
 			NBTTagCompound tag = new NBTTagCompound();
 			en.c(tag);
-			tag.setString("CommandBind", cmd);
+			tag.setString("CustomName", cmd);
 			en.f(tag);
-			p.sendMessage(ChatColor.GREEN + "Successfully bound command " + cmd
-					+ " to entity.");
+			p.sendMessage(ChatColor.GREEN + "Successfully bound command "
+					+ tag.getString("CustomName") + " to entity.");
 			ToBind.remove(p.getUniqueId());
 			e.setCancelled(true);
 			return;
@@ -52,11 +52,11 @@ public class NPCBinder extends MyListener {
 				.getHandle();
 		NBTTagCompound tag = new NBTTagCompound();
 		en.c(tag);
-		String cmd = tag.getString("CommandBind");
+		String cmd = tag.getString("CustomName");
 		if (cmd == null)
 			return;
-		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-				cmd.replace("{p}", p.getName()));
+		String command = cmd.replace("{p}", p.getName());
+		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
 		e.setCancelled(true);
 	}
 
