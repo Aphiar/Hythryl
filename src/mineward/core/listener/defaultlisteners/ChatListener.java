@@ -2,12 +2,15 @@ package mineward.core.listener.defaultlisteners;
 
 import java.util.ArrayList;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 import mineward.core.achievement.general.ChatAchievement;
 import mineward.core.common.Prefix.PrefixColor;
 import mineward.core.common.Rank;
-import mineward.core.common.utils.*;
+import mineward.core.common.utils.C;
+import mineward.core.common.utils.F;
+import mineward.core.common.utils.TimeUtil;
+import mineward.core.common.utils.UtilFilter;
+import mineward.core.common.utils.UtilLevel;
 import mineward.core.listener.MyListener;
 import mineward.core.player.HPlayer;
 import mineward.core.punish.Punish;
@@ -80,7 +83,8 @@ public class ChatListener extends MyListener {
 		for (String words : bannedwords) {
 			if (msg.contains(words)) {
 				e.setCancelled(true);
-				F.message(p, "Chat", "Please do not swear! It is against the rules!");
+				F.message(p, "Chat",
+						"Please do not swear! It is against the rules!");
 				return;
 			}
 		}
