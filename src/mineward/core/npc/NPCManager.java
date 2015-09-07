@@ -13,6 +13,7 @@ public class NPCManager {
 		NBTTagCompound tag = new NBTTagCompound();
 		e.c(tag);
 		tag.setBoolean("NoAI", true);
+		tag.setInt("Fire", 0);
 		e.f(tag);
 	}
 

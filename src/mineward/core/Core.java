@@ -29,6 +29,7 @@ import mineward.core.listener.defaultlisteners.QuitListener;
 import mineward.core.listener.defaultlisteners.WeatherListener;
 import mineward.core.moderation.GamemodeCMD;
 import mineward.core.moderation.VanishCMD;
+import mineward.core.npc.NPCBinder;
 import mineward.core.npc.NPCCommand;
 import mineward.core.player.HPlayer;
 import mineward.core.punish.Punish;
@@ -104,6 +105,8 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterListener(new UtilVanish(), this);
 		MyFactory.RegisterCommand(new GamemodeCMD(), this);
 		MyFactory.RegisterCommand(new TPAllCMD(), this);
+
+		MyFactory.RegisterListener(new NPCBinder(), this);
 
 		AddAchievements();
 
