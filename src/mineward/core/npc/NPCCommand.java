@@ -18,9 +18,20 @@ public class NPCCommand extends MyCommand {
 
 	@Override
 	public void execute(Player p, String[] args) {
-		if (args.length < 2) {
+		if (args.length == 0
+				|| (args.length == 1 && !args[0].equalsIgnoreCase("kill"))) {
 			F.help(p, "npc <type> <name>", "Summon entity and vegetate it",
 					Rank.Admin);
+			F.help(p, "npc kill",
+					"Kill all entities in a radius of 10 blocks.", Rank.Admin);
+			return;
+		} else if (args.length == 1) {
+			int num = 0;
+			for (Entity e : p.getNearbyEntities(10, 10, 10)) {
+				e.remove();
+				num++;
+			}
+			p.sendMessage(ChatColor.GREEN + "Killed " + num + " entities!");
 			return;
 		}
 		String msg = "";
