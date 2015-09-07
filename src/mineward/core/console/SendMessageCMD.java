@@ -19,7 +19,7 @@ public class SendMessageCMD extends ConsoleCommand {
 		try {
 			String msg = "";
 			for (int i = 1; i < args.length - 1; i++) {
-				msg += args[i];
+				msg += args[i] + " ";
 			}
 			msg += args[args.length - 1];
 			msg = ChatColor.translateAlternateColorCodes('&', msg);
