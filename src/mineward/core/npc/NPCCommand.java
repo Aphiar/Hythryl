@@ -22,12 +22,12 @@ public class NPCCommand extends MyCommand {
 				|| (args.length == 1 && !args[0].equalsIgnoreCase("kill"))) {
 			F.help(p, "npc <type> <name>", "Summon entity and vegetate it",
 					Rank.Admin);
-			F.help(p, "npc kill",
-					"Kill all entities in a radius of 10 blocks.", Rank.Admin);
+			F.help(p, "npc kill", "Kill all entities in a radius of 3 blocks.",
+					Rank.Admin);
 			return;
 		} else if (args.length == 1) {
 			int num = 0;
-			for (Entity e : p.getNearbyEntities(10, 10, 10)) {
+			for (Entity e : p.getNearbyEntities(3, 3, 3)) {
 				e.remove();
 				num++;
 			}
