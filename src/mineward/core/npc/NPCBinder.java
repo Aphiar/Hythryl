@@ -4,11 +4,10 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import mineward.core.listener.MyListener;
-import net.minecraft.server.v1_8_R3.NBTTagCompound;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftEntity;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,26 +35,56 @@ public class NPCBinder extends MyListener {
 		Entity ent = e.getRightClicked();
 		if (ToBind.containsKey(p.getUniqueId())) {
 			String cmd = ToBind.get(p.getUniqueId());
-			net.minecraft.server.v1_8_R3.Entity en = ((CraftEntity) ent)
-					.getHandle();
-			NBTTagCompound tag = new NBTTagCompound();
-			en.c(tag);
-			tag.setString("CustomName", cmd);
-			en.f(tag);
-			p.sendMessage(ChatColor.GREEN + "Successfully bound command "
-					+ tag.getString("CustomName") + " to entity.");
+			ArmorStand as = ent.getWorld().spawn(ent.getLocation(),
+					ArmorStand.class);
+			as.setCustomNameVisible(false);
+			as.setCustomName(ent.getEntityId() + "§;" + cmd);
+			as.setGravity(false);
+			as.setArms(false);
+			as.setBasePlate(false);
+			as.setVisible(false);
+			as.setSmall(true);
+			as.setRemoveWhenFarAway(false);
+			if (ent.getPassenger() == null) {
+				as.teleport(ent.getLocation());
+			} else {
+				Entity tallest = ent.getPassenger();
+				while (tallest.getPassenger() != null) {
+					tallest = tallest.getPassenger();
+				}
+				tallest.setPassenger(as);
+			}
+			p.sendMessage(ChatColor.GREEN + "Successfully bound command " + cmd
+					+ " to entity.");
 			ToBind.remove(p.getUniqueId());
 			e.setCancelled(true);
 			return;
 		}
-		net.minecraft.server.v1_8_R3.Entity en = ((CraftEntity) ent)
-				.getHandle();
-		NBTTagCompound tag = new NBTTagCompound();
-		en.c(tag);
-		String cmd = tag.getString("CustomName");
-		if (cmd == null)
-			return;
-		String command = cmd.replace("{p}", p.getName());
+		String cmd = null;
+		if (ent.getPassenger() == null) {
+			for (Entity ne : ent.getNearbyEntities(1, 1, 1)) {
+				if (ne.getLocation().getX() == ent.getLocation().getX()
+						&& ne.getLocation().getY() == ent.getLocation().getY()
+						&& ne.getLocation().getZ() == ent.getLocation().getZ()
+						&& ne instanceof ArmorStand
+						&& Integer.valueOf(ne.getCustomName().split("§;")[0])
+								.intValue() == ent.getEntityId()) {
+					cmd = ne.getCustomName();
+					break;
+				}
+			}
+			if (cmd == null) {
+				return;
+			}
+		}
+		if (cmd == null) {
+			Entity tallest = ent.getPassenger();
+			while (tallest.getPassenger() != null) {
+				tallest = tallest.getPassenger();
+			}
+			cmd = tallest.getCustomName();
+		}
+		String command = cmd.split("§;")[1].replace("{p}", p.getName());
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
 		e.setCancelled(true);
 	}
