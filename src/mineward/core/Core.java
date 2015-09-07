@@ -29,6 +29,7 @@ import mineward.core.listener.defaultlisteners.QuitListener;
 import mineward.core.listener.defaultlisteners.WeatherListener;
 import mineward.core.moderation.GamemodeCMD;
 import mineward.core.moderation.VanishCMD;
+import mineward.core.npc.NPCCommand;
 import mineward.core.player.HPlayer;
 import mineward.core.punish.Punish;
 import mineward.core.punish.PunishCMD;
@@ -87,6 +88,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new RankCCMD(), this);
 		MyFactory.RegisterCommand(new CoinCCMD(), this);
 		MyFactory.RegisterCommand(new ChargebackCCMD(), this);
+		MyFactory.RegisterCommand(new NPCCommand(), this);
 
 		MyFactory.RegisterListener(new ChatListener(), this);
 		MyFactory.RegisterListener(new JoinListener(), this);
