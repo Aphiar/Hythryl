@@ -86,6 +86,8 @@ public class NPCBinder extends MyListener {
 			}
 			cmd = tallest.getCustomName();
 		}
+		if (!(cmd.contains("§;")))
+			return;
 		String command = cmd.split("§;")[1].replace("{p}", p.getName());
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
 		e.setCancelled(true);
