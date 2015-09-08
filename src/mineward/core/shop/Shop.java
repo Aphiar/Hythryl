@@ -130,6 +130,7 @@ public class Shop implements Listener {
 													.getItemMeta()
 													.getDisplayName()
 													.contains("Buy")) {
+												UtilCoin.RemoveCoins(p, cost);
 												Database.runUpdateStatement("INSERT INTO `Shop` (`uuid`,`item`,`cost`) VALUES('"
 														+ p.getUniqueId()
 																.toString()
