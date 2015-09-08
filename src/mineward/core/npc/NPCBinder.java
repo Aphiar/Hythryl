@@ -7,6 +7,7 @@ import mineward.core.listener.MyListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -88,8 +89,13 @@ public class NPCBinder extends MyListener {
 		}
 		if (!(cmd.contains("§;")))
 			return;
+		CommandSender sender = Bukkit.getConsoleSender();
+		if (cmd.contains("(OPEN_PLAYER)")) {
+			cmd.replace("(OPEN_PLAYER)", "");
+			sender = p;
+		}
 		String command = cmd.split("§;")[1].replace("{p}", p.getName());
-		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), command);
+		Bukkit.getServer().dispatchCommand(sender, command);
 		e.setCancelled(true);
 	}
 
