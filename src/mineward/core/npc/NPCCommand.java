@@ -5,6 +5,7 @@ import mineward.core.common.Rank;
 import mineward.core.common.utils.F;
 
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Ageable;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -59,6 +60,7 @@ public class NPCCommand extends MyCommand {
 		String entTypeName = args[0].toUpperCase();
 		boolean as = false;
 		boolean ride = false;
+		boolean baby = false;
 		if (entTypeName.contains(":AS")) {
 			as = true;
 			if (entTypeName.contains(":RIDE")) {
@@ -66,6 +68,9 @@ public class NPCCommand extends MyCommand {
 				entTypeName = entTypeName.replace(":RIDE", "");
 			}
 			entTypeName = entTypeName.replace(":AS", "");
+		}
+		if (entTypeName.contains(":BABY")) {
+			baby = true;
 		}
 		try {
 			EntityType.valueOf(entTypeName);
@@ -89,11 +94,15 @@ public class NPCCommand extends MyCommand {
 			return;
 		}
 		LivingEntity le = (LivingEntity) e;
-		le.setCustomNameVisible(true);
+		le.setCustomNameVisible(false);
 		le.setCanPickupItems(false);
 		le.setMaxHealth(Double.MAX_VALUE);
 		le.setFireTicks(0);
 		le.setRemoveWhenFarAway(false);
+		if (baby && le instanceof Ageable)
+			((Ageable) le).setBaby();
+		else if (le instanceof Ageable)
+			((Ageable) le).setAdult();
 		if (as) {
 			ArmorStand a = le.getWorld().spawn(le.getEyeLocation(),
 					ArmorStand.class);
