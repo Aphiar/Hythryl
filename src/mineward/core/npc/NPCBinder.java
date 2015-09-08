@@ -91,7 +91,7 @@ public class NPCBinder extends MyListener {
 			return;
 		CommandSender sender = Bukkit.getConsoleSender();
 		if (cmd.contains("(OPEN_PLAYER)")) {
-			cmd.replace("(OPEN_PLAYER)", "");
+			cmd = cmd.replace("(OPEN_PLAYER)", "");
 			sender = p;
 		}
 		String command = cmd.split("§;")[1].replace("{p}", p.getName());
