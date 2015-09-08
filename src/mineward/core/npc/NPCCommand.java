@@ -71,6 +71,7 @@ public class NPCCommand extends MyCommand {
 		}
 		if (entTypeName.contains(":BABY")) {
 			baby = true;
+			entTypeName = entTypeName.replace(":BABY", "");
 		}
 		try {
 			EntityType.valueOf(entTypeName);
@@ -94,7 +95,7 @@ public class NPCCommand extends MyCommand {
 			return;
 		}
 		LivingEntity le = (LivingEntity) e;
-		le.setCustomNameVisible(false);
+		le.setCustomNameVisible(true);
 		le.setCanPickupItems(false);
 		le.setMaxHealth(Double.MAX_VALUE);
 		le.setFireTicks(0);
