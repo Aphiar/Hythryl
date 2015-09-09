@@ -14,6 +14,7 @@ import mineward.core.chat.HelpdeskReplyCMD;
 import mineward.core.chat.MessageCMD;
 import mineward.core.chat.MessageReplyCMD;
 import mineward.core.chat.StaffChatCMD;
+import mineward.core.coins.SetcoinsCMD;
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
 import mineward.core.common.SubPlugin;
@@ -91,6 +92,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new CoinCCMD(), this);
 		MyFactory.RegisterCommand(new ChargebackCCMD(), this);
 		MyFactory.RegisterCommand(new NPCCommand(), this);
+		MyFactory.RegisterCommand(new SetcoinsCMD(), this);
 
 		MyFactory.RegisterListener(new ChatListener(), this);
 		MyFactory.RegisterListener(new JoinListener(), this);
