@@ -21,8 +21,21 @@ public class Cooldown {
 
 	public static List<CooldownToken> tokens = new ArrayList<CooldownToken>();
 
+	public static void CancelCooldown(String cfor, String data) {
+		CooldownToken token = null;
+		for (CooldownToken t : tokens) {
+			if (t.Coolfor.equals(cfor) && t.Data.equals(data)) {
+				token = t;
+			}
+		}
+		if (token == null)
+			return;
+		tokens.remove(token);
+	}
+
 	@SuppressWarnings("deprecation")
-	public static boolean Cool(final String cfor, final String data, long time) {
+	public static boolean Cool(final String cfor, final String data,
+			final long time) {
 		long ctime = System.currentTimeMillis();
 		for (CooldownToken tkn : tokens) {
 			if (tkn.Coolfor.equals(cfor) && tkn.Data.equals(data)) {
@@ -44,6 +57,8 @@ public class Cooldown {
 		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
 			public void run() {
 				OfflinePlayer op = Bukkit.getOfflinePlayer(cfor);
+				Bukkit.getPluginManager().callEvent(
+						new CooldownFinishEvent(cfor, data, time));
 				if (op.isOnline())
 					F.message(op.getPlayer(), "Cooldown", "You can use "
 							+ C.STR_ELEMENT + data + C.STR_MAIN + " again.");
