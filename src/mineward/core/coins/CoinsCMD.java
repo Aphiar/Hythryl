@@ -32,19 +32,15 @@ public class CoinsCMD extends MyCommand {
                     F.message(p, "Error", args[1] + " is not a number (or is too big)!");
                 }
                 return;
-            }
-            try {
-                OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+            } else if (args.length == 3) {
                 try {
-                    player = Bukkit.getPlayer(args[1]);
+                    OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+                    int coins = Integer.valueOf(args[2]);
+                    UtilCoin.SetCoins(player, coins);
+                    F.message(p, "Coins", "You set " + C.STR_PLAYER + player.getName() + C.STR_MAIN + "'s coin amount to " + args[2] + "!");
                 } catch (Exception ex) {
-
+                    F.message(p, "Error", args[2] + " is not a number (or is too big)!");
                 }
-                int coins = Integer.valueOf(args[2]);
-                UtilCoin.SetCoins(player, coins);
-                F.message(p, "Coins", "You set " + C.STR_PLAYER + player.getName() + C.STR_MAIN + "'s coin amount to " + args[2] + "!");
-            } catch (Exception ex) {
-                F.message(p, "Error", args[2] + " is not a number (or is too big)!");
             }
         }
         if (args[0].equalsIgnoreCase("add")) {
@@ -57,19 +53,15 @@ public class CoinsCMD extends MyCommand {
                     F.message(p, "Error", args[1] + " is not a number (or is too big)!");
                 }
                 return;
-            }
-            try {
-                OfflinePlayer pl = Bukkit.getOfflinePlayer(args[1]);
+            } else if (args.length == 3) {
                 try {
-                    pl = Bukkit.getPlayer(args[1]);
+                    OfflinePlayer pl = Bukkit.getOfflinePlayer(args[1]);
+                    int addamount = Integer.valueOf(args[2]);
+                    UtilCoin.AddCoins(pl, addamount);
+                    F.message(p, "Coins", "You added " + args[2] + " coins to " + C.STR_PLAYER + args[1] + C.STR_MAIN + "'s balance. New balance: " + UtilCoin.GetCoins(pl) + "!");
                 } catch (Exception ex) {
-
+                    F.message(p, "Error", args[2] + " is not a number (or is too big)!");
                 }
-                int addamount = Integer.valueOf(args[2]);
-                UtilCoin.AddCoins(pl, addamount);
-                F.message(p, "Coins", "You added " + args[2] + " coins to " + C.STR_PLAYER + args[1] + C.STR_MAIN + "'s balance. New balance: " + UtilCoin.GetCoins(pl) + "!");
-            } catch (Exception ex) {
-                F.message(p, "Error", args[2] + " is not a number (or is too big)!");
             }
         }
         if (args[0].equalsIgnoreCase("remove")) {
@@ -82,19 +74,15 @@ public class CoinsCMD extends MyCommand {
                     F.message(p, "Error", args[1] + " is not a number (or is too big)!");
                 }
                 return;
-            }
-            try {
-                OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+            } else if(args.length == 3) {
                 try {
-                    player= Bukkit.getPlayer(args[1]);
+                    OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
+                    int removeamount = Integer.valueOf(args[2]);
+                    UtilCoin.RemoveCoins(player, removeamount);
+                    F.message(p, "Coins", "You removed " + args[2] + " from " + C.STR_PLAYER + args[1] + C.STR_MAIN + "'s balance. New balance: " + UtilCoin.GetCoins(player) + "!");
                 } catch (Exception ex) {
-
+                    F.message(p, "Error", args[2] + " is not a number (or is too big)!");
                 }
-                int removeamount = Integer.valueOf(args[2]);
-                UtilCoin.RemoveCoins(player, removeamount);
-                F.message(p, "Coins", "You removed " + args[2] + " from " + C.STR_PLAYER + args[1] + C.STR_MAIN + "'s balance. New balance: " + UtilCoin.GetCoins(player) + "!");
-            } catch (Exception ex) {
-                F.message(p, "Error", args[2] + " is not a number (or is too big)!");
             }
         }
     }
