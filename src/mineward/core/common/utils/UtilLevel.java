@@ -8,6 +8,7 @@ import mineward.core.common.Database;
 import mineward.core.player.HPlayer;
 
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class UtilLevel {
@@ -53,7 +54,7 @@ public class UtilLevel {
 		setXP(uuid, getXP(uuid) + xp);
 	}
 
-	public static long addXP(Player p, long xp) {
+	public static long addXP(OfflinePlayer p, long xp) {
 		long oldXP = getXP(p.getUniqueId());
 		long newXP = oldXP + xp;
 		setXP(p.getUniqueId(), newXP);
