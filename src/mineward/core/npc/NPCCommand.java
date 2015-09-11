@@ -100,6 +100,9 @@ public class NPCCommand extends MyCommand {
 		le.setMaxHealth(Double.MAX_VALUE);
 		le.setFireTicks(0);
 		le.setRemoveWhenFarAway(false);
+		if (le instanceof Ageable) {
+			((Ageable) le).setAgeLock(true);
+		}
 		if (baby && le instanceof Ageable)
 			((Ageable) le).setBaby();
 		else if (le instanceof Ageable)
