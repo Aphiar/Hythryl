@@ -46,8 +46,6 @@ import mineward.core.stats.StatsGUI;
 import mineward.core.teleportation.TPAllCMD;
 import mineward.core.teleportation.TPCMD;
 import mineward.core.teleportation.TPHereCMD;
-import mineward.core.vote.AddvoteCCMD;
-import mineward.core.vote.VoteCMD;
 import mineward.core.we.BlockProtect;
 
 import org.bukkit.Bukkit;
@@ -95,8 +93,6 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new ChargebackCCMD(), this);
 		MyFactory.RegisterCommand(new NPCCommand(), this);
 		MyFactory.RegisterCommand(new CoinsCMD(), this);
-		MyFactory.RegisterCommand(new VoteCMD(), this);
-		MyFactory.RegisterCommand(new AddvoteCCMD(), this);
 
 		MyFactory.RegisterListener(new ChatListener(), this);
 		MyFactory.RegisterListener(new JoinListener(), this);
