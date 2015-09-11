@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 public class AddvoteCCMD extends ConsoleCommand {
 
     public AddvoteCCMD() {
-        super("console::vote::add", new String[0], "Add a vote reward to a player.");
+        super("console:addvote", new String[0], "Add a vote reward to a player.");
     }
 
     @SuppressWarnings("deprecation")
