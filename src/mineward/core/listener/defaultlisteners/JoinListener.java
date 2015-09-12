@@ -65,9 +65,9 @@ public class JoinListener extends MyListener {
 					+ "Welcome to Hythryl, a new Minecraft Minigames Server.");
 			p.sendMessage("");
 			p.sendMessage("Website: " + ChatColor.GREEN + ""
-					+ ChatColor.UNDERLINE + "www.hythryl.net");
+					+ ChatColor.UNDERLINE + "www.hythryl.com");
 			p.sendMessage("Rules: " + ChatColor.GREEN + ""
-					+ ChatColor.UNDERLINE + "www.hythryl.net/rules");
+					+ ChatColor.UNDERLINE + "www.hythryl.com/rules");
 			p.sendMessage("");
 			AccountManager.getAccount(p.getUniqueId().toString(), true);
 		}
@@ -95,7 +95,7 @@ public class JoinListener extends MyListener {
 		IChatBaseComponent header = ChatSerializer
 				.a(ChatColor.translateAlternateColorCodes('&', "{text:\"&6&lHythryl Network\"}"));
 		IChatBaseComponent footer = ChatSerializer
-				.a(ChatColor.translateAlternateColorCodes('&', "{text:\"You're playing on &bplay.hythryl.net\n&fWebsite: &awww.hythryl.net\"}"));
+				.a(ChatColor.translateAlternateColorCodes('&', "{text:\"You're playing on &bplay.hythryl.com\n&fWebsite: &awww.hythryl.com\"}"));
 		PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter(
 				header);
 		try {
