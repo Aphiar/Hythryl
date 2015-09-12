@@ -84,7 +84,7 @@ public class UtilVanish extends MyListener implements Listener {
 		}
 	}
 
-	@EventHandler
+	/*@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
 		if (getVanished(p)) {
@@ -96,4 +96,5 @@ public class UtilVanish extends MyListener implements Listener {
 			}
 		}
 	}
+	*/
 }

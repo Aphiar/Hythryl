@@ -107,7 +107,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterListener(new BlockProtect(), this);
 		MyFactory.RegisterCommand(new TPCMD(), this);
 		MyFactory.RegisterCommand(new TPHereCMD(), this);
-		MyFactory.RegisterCommand(new VanishCMD(), this);
+		//MyFactory.RegisterCommand(new VanishCMD(), this);
 		MyFactory.RegisterListener(new UtilVanish(), this);
 		MyFactory.RegisterCommand(new GamemodeCMD(), this);
 		MyFactory.RegisterCommand(new TPAllCMD(), this);
