@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class NPCBinder extends MyListener {
 
-	public static HashMap<UUID, String> ToBind = new HashMap<UUID, String>();
+	public static HashMap<UUID, String> ToBind = new HashMap<>();
 
 	public NPCBinder() {
 		super("NPC Binder");
