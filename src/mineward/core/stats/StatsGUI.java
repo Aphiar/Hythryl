@@ -144,7 +144,7 @@ public class StatsGUI extends MyListener {
 		// JHeifetz (Zeh)
 		gui.AddButton(new Button(null, ChatColor.DARK_RED + "" + ChatColor.BOLD
 				+ "Zeh", new String[] { "Lead Developer for the server.",
-				"Managing Director & Flounder.",
+				"Managing Director & Owner.",
 				ChatColor.GRAY + "Also known as: ",
 				ChatColor.GRAY + "JHeifetz", ChatColor.GRAY + "Zehr_",
 				ChatColor.GRAY + "jollie000l" }, UtilItem.GetSkull("Zeh"), 9));
@@ -153,11 +153,11 @@ public class StatsGUI extends MyListener {
 		gui.AddButton(new Button(null, ChatColor.DARK_RED + "" + ChatColor.BOLD
 				+ "GUNZxNxROSEZ", new String[] {
 				"Head of Support, Forums Nerd.",
-				"Community Management & Flounder." }, UtilItem
+				"Community Management & Owner." }, UtilItem
 				.GetSkull("GUNZxNxROSEZ"), 10));
 		// Will
 		gui.AddButton(new Button(null, ChatColor.DARK_RED + "" + ChatColor.BOLD
-				+ "Will", new String[] { "Community Manager",
+				+ "Will", new String[] { "Proud Owner",
 				"A rapper who raps about ", "wrapping wraps. Not a wrapper." },
 				UtilItem.GetSkull("Will"), 18));
 		// FelixT
