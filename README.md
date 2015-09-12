@@ -1,2 +1,2 @@
 # Core
-The freaking core repository so Ian can freaking upload it.
+The core that powers the Hythryl Network!
