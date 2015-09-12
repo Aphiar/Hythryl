@@ -17,9 +17,9 @@ public class CoinsCMD extends MyCommand {
 
     @SuppressWarnings("deprecation")
     public void execute(Player p, String[] args) {
-        if (args.length <= 1 || args.length > 3) {
-            F.help(p, "coins <set|add|remove> <#>", "Set your own coins amount", Rank.Admin);
-            F.help(p, "coins <set|add|remove> <player> <#>", "Set a player's coins amount", Rank.Admin);
+        if (args.length == 0 || args.length > 3) {
+            F.help(p, "coins <set|add|remove|reset> <#>", "Set your own coins amount", Rank.Admin);
+            F.help(p, "coins <set|add|remove|reset> <player> <#>", "Set a player's coins amount", Rank.Admin);
             return;
         }
         if (args[0].equalsIgnoreCase("set")) {
@@ -83,6 +83,17 @@ public class CoinsCMD extends MyCommand {
                 } catch (Exception ex) {
                     F.message(p, "Error", args[2] + " is not a number (or is too big)!");
                 }
+            }
+        }
+        if (args[0].equalsIgnoreCase("reset")) {
+            if (args.length == 1) {
+                UtilCoin.SetCoins(p, 0);
+                F.message(p, "Coins", "You have reset your coins successfully!");
+                return;
+            } else if (args.length == 2) {
+                OfflinePlayer player = Bukkit.getOfflinePlayer(args[0]);
+                UtilCoin.SetCoins(player, 0);
+                F.message(p, "Coins", "You have successfully reset " + C.STR_PLAYER + args[0] + C.STR_MAIN + "'s amount!");
             }
         }
     }
