@@ -18,6 +18,7 @@ import mineward.core.coins.CoinsCMD;
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
 import mineward.core.common.SubPlugin;
+import mineward.core.common.utils.UtilSys;
 import mineward.core.common.utils.UtilVanish;
 import mineward.core.console.SendMessageCMD;
 import mineward.core.fun.FartCMD;
@@ -30,6 +31,7 @@ import mineward.core.listener.defaultlisteners.JoinListener;
 import mineward.core.listener.defaultlisteners.QuitListener;
 import mineward.core.listener.defaultlisteners.WeatherListener;
 import mineward.core.moderation.GamemodeCMD;
+import mineward.core.moderation.SystemCMD;
 import mineward.core.moderation.VanishCMD;
 import mineward.core.npc.NPCBinder;
 import mineward.core.npc.NPCCommand;
@@ -87,6 +89,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new CommandsCMD(), this);
 		MyFactory.RegisterCommand(new StatsCMD(), this);
 		MyFactory.RegisterCommand(new LevelCMD(), this);
+		MyFactory.RegisterCommand(new SystemCMD(), this);
 
 		MyFactory.RegisterCommand(new RankCCMD(), this);
 		MyFactory.RegisterCommand(new CoinCCMD(), this);
@@ -115,6 +118,8 @@ public class Core extends JavaPlugin {
 		AddAchievements();
 
 		long now = System.currentTimeMillis();
+
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new UtilSys(), 100L, 1L);
 
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			TimeOnline.setOnline(p, now);
