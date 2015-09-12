@@ -16,7 +16,7 @@ public class SystemCMD extends MyCommand {
     public static String ServerName = "Unknown";
 
     public SystemCMD() {
-        super("system", new String[] { "sysinfo", "mem", "cpu", "lag", "gc", "memory" }, "Display Memory Usage/Uptime/TPS", Rank.Admin);
+        super("system", new String[] { "sysinfo", "mem", "cpu", "lag", "gc", "memory", "tps" }, "Display Memory Usage/Uptime/TPS", Rank.Admin);
     }
 
     public void execute(Player p, String[] args) {
