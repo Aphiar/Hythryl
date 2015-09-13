@@ -23,7 +23,7 @@ public class UtilSys implements Runnable {
         if (TICK_COUNT - tickID >= TICKS.length) {
 
         }
-        long time = TICKS[(tickID % TICKS.length)];
+        //long time = TICKS[(tickID % TICKS.length)];
         return System.currentTimeMillis();
     }
 

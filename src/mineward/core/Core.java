@@ -32,7 +32,7 @@ import mineward.core.listener.defaultlisteners.QuitListener;
 import mineward.core.listener.defaultlisteners.WeatherListener;
 import mineward.core.moderation.GamemodeCMD;
 import mineward.core.moderation.SystemCMD;
-import mineward.core.moderation.VanishCMD;
+//import mineward.core.moderation.VanishCMD;
 import mineward.core.npc.NPCBinder;
 import mineward.core.npc.NPCCommand;
 import mineward.core.player.HPlayer;
@@ -107,7 +107,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterListener(new BlockProtect(), this);
 		MyFactory.RegisterCommand(new TPCMD(), this);
 		MyFactory.RegisterCommand(new TPHereCMD(), this);
-		//MyFactory.RegisterCommand(new VanishCMD(), this);
+		// MyFactory.RegisterCommand(new VanishCMD(), this);
 		MyFactory.RegisterListener(new UtilVanish(), this);
 		MyFactory.RegisterCommand(new GamemodeCMD(), this);
 		MyFactory.RegisterCommand(new TPAllCMD(), this);
@@ -119,7 +119,8 @@ public class Core extends JavaPlugin {
 
 		long now = System.currentTimeMillis();
 
-		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new UtilSys(), 100L, 1L);
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new UtilSys(),
+				100L, 1L);
 
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			TimeOnline.setOnline(p, now);
