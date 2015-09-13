@@ -11,10 +11,12 @@ import java.util.UUID;
 import mineward.core.common.Database;
 import mineward.core.common.Prefix.PrefixColor;
 import mineward.core.common.PrefixBuilder;
+import mineward.core.common.Rank;
 import mineward.core.common.utils.C;
 import mineward.core.common.utils.F;
 import mineward.core.common.utils.TimeUtil;
 
+import mineward.core.player.HPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -171,39 +173,42 @@ public class Punish {
 		}
 		if (announce) {
 			for (Player pl : Bukkit.getOnlinePlayers()) {
-				String time = p.time == -1 ? "Forever" : TimeUtil
-						.toString(p.time);
-				if (p.type == PunishType.Ban) {
+				HPlayer hpl = HPlayer.a(pl);
+				if (hpl.getRank().isPermissible(Rank.Jrmod)) {
+					String time = p.time == -1 ? "Forever" : TimeUtil
+							.toString(p.time);
+					if (p.type == PunishType.Ban) {
+						F.message(
+								pl,
+								PrefixBuilder.getPrefixBuilder(false, "Punish",
+										PrefixColor.Important).build(),
+								C.STR_PLAYER + p.punisher + C.STR_MAIN + " banned "
+										+ C.STR_PLAYER + p.punished.getName()
+										+ C.STR_MAIN + " for " + C.STR_ELEMENT
+										+ time + C.STR_MAIN + ".");
+					} else if (p.type == PunishType.Mute) {
+						F.message(
+								pl,
+								PrefixBuilder.getPrefixBuilder(false, "Punish",
+										PrefixColor.Important).build(),
+								C.STR_PLAYER + p.punisher + C.STR_MAIN + " muted "
+										+ C.STR_PLAYER + p.punished.getName()
+										+ C.STR_MAIN + " for " + C.STR_ELEMENT
+										+ time + C.STR_MAIN + ".");
+					} else if (p.type == PunishType.Warn) {
+						F.message(
+								pl,
+								PrefixBuilder.getPrefixBuilder(false, "Punish",
+										PrefixColor.Important).build(),
+								C.STR_PLAYER + p.punisher + C.STR_MAIN + " warned "
+										+ C.STR_PLAYER + p.punished.getName()
+										+ C.STR_MAIN + ".");
+					}
 					F.message(
 							pl,
-							PrefixBuilder.getPrefixBuilder(false, "Punish",
-									PrefixColor.Important).build(),
-							C.STR_PLAYER + p.punisher + C.STR_MAIN + " banned "
-									+ C.STR_PLAYER + p.punished.getName()
-									+ C.STR_MAIN + " for " + C.STR_ELEMENT
-									+ time + C.STR_MAIN + ".");
-				} else if (p.type == PunishType.Mute) {
-					F.message(
-							pl,
-							PrefixBuilder.getPrefixBuilder(false, "Punish",
-									PrefixColor.Important).build(),
-							C.STR_PLAYER + p.punisher + C.STR_MAIN + " muted "
-									+ C.STR_PLAYER + p.punished.getName()
-									+ C.STR_MAIN + " for " + C.STR_ELEMENT
-									+ time + C.STR_MAIN + ".");
-				} else if (p.type == PunishType.Warn) {
-					F.message(
-							pl,
-							PrefixBuilder.getPrefixBuilder(false, "Punish",
-									PrefixColor.Important).build(),
-							C.STR_PLAYER + p.punisher + C.STR_MAIN + " warned "
-									+ C.STR_PLAYER + p.punished.getName()
-									+ C.STR_MAIN + ".");
+							PrefixBuilder.getPrefixBuilder(false, "Reason",
+									PrefixColor.Important).build(), p.reason);
 				}
-				F.message(
-						pl,
-						PrefixBuilder.getPrefixBuilder(false, "Reason",
-								PrefixColor.Important).build(), p.reason);
 			}
 		}
 	}
