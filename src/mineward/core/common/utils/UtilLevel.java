@@ -12,7 +12,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 public class UtilLevel {
-
 	static ChatColor[] colors = new ChatColor[] { ChatColor.GRAY,
 			ChatColor.DARK_GRAY, ChatColor.WHITE, ChatColor.YELLOW,
 			ChatColor.GREEN, ChatColor.DARK_GREEN, ChatColor.AQUA,
@@ -61,6 +60,13 @@ public class UtilLevel {
 		return newXP;
 	}
 
+	public static long addXP(Player p, long xp) {
+		long oldXP = getXP(p.getUniqueId());
+		long newXP = oldXP + xp;
+		setXP(p.getUniqueId(), newXP);
+		return newXP;
+	}
+
 	public static int getLevel(long xp) {
 		long level = 0;
 		while (xp > ((3000 * (level + 1)) + (1500 * level))) {
@@ -80,5 +86,4 @@ public class UtilLevel {
 		}
 		return colors[b] + "";
 	}
-
 }
