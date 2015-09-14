@@ -9,6 +9,7 @@ import java.util.UUID;
 import mineward.core.common.Database;
 import mineward.core.common.utils.F;
 import mineward.core.common.utils.UtilCoin;
+import mineward.core.common.utils.UtilMoney;
 import mineward.core.gui.Button;
 import mineward.core.gui.GUI;
 import net.md_5.bungee.api.ChatColor;
@@ -33,6 +34,7 @@ public class Shop implements Listener {
 	private int cost;
 	private UUID id;
 	private JavaPlugin plugin;
+	private boolean rupees = false;
 
 	public Shop(Player p, String displayName, String item, Material mat,
 			int cost, JavaPlugin plugin) {
@@ -64,13 +66,18 @@ public class Shop implements Listener {
 		return mat;
 	}
 
+	public String getEconomy() {
+		return rupees ? "Rupees" : "Coins";
+	}
+
 	private List<Button> buildButtons(int slot) {
 		List<Button> btns = new ArrayList<Button>();
 		for (int i : getSlots(slot)) {
 			btns.add(new Button(null, ChatColor.GREEN + "" + ChatColor.BOLD
 					+ "Buy " + displayName, new String[] { ChatColor.GRAY
-					+ "It will cost " + ChatColor.WHITE + cost + " Coins" },
-					new ItemStack(Material.STAINED_CLAY, 1, (byte) 5), i));
+					+ "It will cost " + ChatColor.WHITE + cost + " "
+					+ getEconomy() }, new ItemStack(Material.STAINED_CLAY, 1,
+					(byte) 5), i));
 		}
 		for (int i : getSlots(slot + 6)) {
 			btns.add(new Button(null, ChatColor.RED + "" + ChatColor.BOLD
@@ -86,9 +93,12 @@ public class Shop implements Listener {
 		Bukkit.getPluginManager().registerEvents(this, plugin);
 		GUI gui = new GUI("Confirm Purchase", 54);
 		gui.AddButton(new Button(null, ChatColor.GOLD + "" + ChatColor.BOLD
-				+ displayName, new String[] { ChatColor.WHITE + "" + cost
-				+ " Coins" }, new ItemStack(mat), 13));
+				+ displayName, new String[] { ChatColor.WHITE + "" + cost + " "
+				+ getEconomy() }, new ItemStack(mat), 13));
 		int coins = UtilCoin.GetCoins(getPlayer());
+		if (rupees) {
+			coins = UtilMoney.GetMoney(getPlayer(), "rupees");
+		}
 		if (coins >= cost) {
 			for (Button b : buildButtons(27)) {
 				b.setInventory(gui.inv);
@@ -130,7 +140,16 @@ public class Shop implements Listener {
 													.getItemMeta()
 													.getDisplayName()
 													.contains("Buy")) {
-												UtilCoin.RemoveCoins(p, cost);
+												if (rupees) {
+													UtilMoney
+															.RemoveMoney(
+																	getPlayer(),
+																	getCost(),
+																	"rupees");
+												} else {
+													UtilCoin.RemoveCoins(p,
+															cost);
+												}
 												Database.runUpdateStatement("INSERT INTO `Shop` (`uuid`,`item`,`cost`) VALUES('"
 														+ p.getUniqueId()
 																.toString()
@@ -151,7 +170,8 @@ public class Shop implements Listener {
 																+ ChatColor.GOLD
 																+ ""
 																+ cost
-																+ " Coins"
+																+ " "
+																+ getEconomy()
 																+ ChatColor.GRAY
 																+ ".");
 												Bukkit.getPluginManager()

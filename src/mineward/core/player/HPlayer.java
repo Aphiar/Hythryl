@@ -1,5 +1,7 @@
 package mineward.core.player;
 
+import java.util.HashMap;
+
 import mineward.core.Core;
 import mineward.core.common.Rank;
 import mineward.core.common.database.account.AccountManager;
@@ -11,9 +13,10 @@ public class HPlayer {
 
 	private Player p;
 	private Rank rank;
-	private int money;
+	private int coins;
 	private Account acc;
 	private long xp;
+	private HashMap<String, Integer> money;
 
 	public static HPlayer a(Player p) {
 		HPlayer player = new HPlayer();
@@ -21,9 +24,10 @@ public class HPlayer {
 		Account acc = AccountManager.getAccount(p.getUniqueId().toString(),
 				false);
 		player.rank = acc.rank;
-		player.money = acc.money;
+		player.coins = acc.money;
 		player.acc = acc;
 		player.xp = acc.xp;
+		player.money = acc.moneyTypes;
 		return player;
 	}
 
@@ -48,7 +52,7 @@ public class HPlayer {
 	}
 
 	public int getMoney() {
-		return money;
+		return coins;
 	}
 
 	public Account getAccount() {
@@ -60,7 +64,7 @@ public class HPlayer {
 	}
 
 	public void setMoney(int a) {
-		this.money = a;
+		this.coins = a;
 	}
 
 	public long getXP() {
@@ -69,6 +73,14 @@ public class HPlayer {
 
 	public void setXP(long a) {
 		this.xp = a;
+	}
+
+	public void setMoney(String type, int a) {
+		money.put(type, a);
+	}
+
+	public int getMoney(String type) {
+		return money.get(type);
 	}
 
 }

@@ -3,6 +3,7 @@ package mineward.core.common.database.account;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 import mineward.core.common.Database;
 import mineward.core.common.Rank;
@@ -39,6 +40,7 @@ public class AccountManager {
 			long timeonline = 0;
 			long lastseen = 0;
 			long xp = 0;
+			HashMap<String, Integer> moneyTypes = new HashMap<String, Integer>();
 			PreparedStatement statement = Database.getConnection()
 					.prepareStatement(
 							"SELECT * FROM `Account` WHERE `uuid`='" + uuid
@@ -52,6 +54,8 @@ public class AccountManager {
 				timeonline = rs.getLong("timeonline");
 				lastseen = rs.getLong("lastseen");
 				xp = rs.getLong("xp");
+				moneyTypes.put("rupees", rs.getInt("rupees"));
+				moneyTypes.put("credit", rs.getInt("credit"));
 			}
 			rs.close();
 			statement.close();
@@ -71,12 +75,12 @@ public class AccountManager {
 					s2.executeUpdate();
 					s2.close();
 					return new AccountManager().new Account(uuid, rank, 0,
-							firstjoined, 0, 0, 0);
+							firstjoined, 0, 0, 0, null);
 				}
 				return null;
 			}
 			return new AccountManager().new Account(uuid, rank, money,
-					firstjoined, timeonline, lastseen, xp);
+					firstjoined, timeonline, lastseen, xp, moneyTypes);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -92,9 +96,11 @@ public class AccountManager {
 		public long timeonline;
 		public long lastseen;
 		public long xp;
+		public HashMap<String, Integer> moneyTypes;
 
 		public Account(String uuid, Rank rank, int money,
-				Timestamp firstjoined, long timeonline, long lastseen, long xp) {
+				Timestamp firstjoined, long timeonline, long lastseen, long xp,
+				HashMap<String, Integer> moneyTypes) {
 			this.uuid = uuid;
 			this.rank = rank;
 			this.money = money;
@@ -102,6 +108,9 @@ public class AccountManager {
 			this.timeonline = timeonline;
 			this.lastseen = lastseen;
 			this.xp = xp;
+			this.moneyTypes = moneyTypes;
+			if (moneyTypes == null)
+				this.moneyTypes = new HashMap<String, Integer>();
 		}
 
 	}
