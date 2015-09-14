@@ -42,6 +42,7 @@ import mineward.core.punish.PunishUIListener;
 import mineward.core.punish.ui.RecordUI;
 import mineward.core.purchases.ChargebackCCMD;
 import mineward.core.purchases.CoinCCMD;
+import mineward.core.rupee.RupeeCMD;
 import mineward.core.scoreboard.SBManager;
 import mineward.core.stats.StatsCMD;
 import mineward.core.stats.StatsGUI;
@@ -96,6 +97,7 @@ public class Core extends JavaPlugin {
 		MyFactory.RegisterCommand(new ChargebackCCMD(), this);
 		MyFactory.RegisterCommand(new NPCCommand(), this);
 		MyFactory.RegisterCommand(new CoinsCMD(), this);
+		MyFactory.RegisterCommand(new RupeeCMD(), this);
 
 		MyFactory.RegisterListener(new ChatListener(), this);
 		MyFactory.RegisterListener(new JoinListener(), this);
