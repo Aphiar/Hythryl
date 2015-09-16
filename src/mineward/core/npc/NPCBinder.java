@@ -68,7 +68,7 @@ public class NPCBinder extends MyListener {
 			String cmd = ToBind.get(p.getUniqueId());
 			File f = getNPCData(p.getWorld().getName(), ent.getEntityId(), true);
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
-			cfg.set("Command", cmd);
+			cfg.set("Command", cmd.replace("(OPEN_PLAYER)", ""));
 			cfg.set("RunAsPlayer", cmd.contains("(OPEN_PLAYER)"));
 			try {
 				cfg.save(f);
