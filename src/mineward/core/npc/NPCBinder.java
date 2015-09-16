@@ -33,7 +33,7 @@ public class NPCBinder extends MyListener {
 	public File getNPCData(String world, int entityId, boolean createIfNotExists) {
 		File f = new File(getWorldFile(world).getPath() + "/" + "NPCData" + "/"
 				+ entityId + ".yml");
-		Bukkit.broadcastMessage(f.getPath());
+		// Bukkit.broadcastMessage(f.getPath());
 		if (createIfNotExists) {
 			if (!f.exists()) {
 				try {
@@ -70,6 +70,11 @@ public class NPCBinder extends MyListener {
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
 			cfg.set("Command", cmd);
 			cfg.set("RunAsPlayer", cmd.contains("(OPEN_PLAYER)"));
+			try {
+				cfg.save(f);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			p.sendMessage(ChatColor.GREEN + "Successfully bound command "
 					+ ChatColor.RED + "/" + cmd + ChatColor.GREEN
 					+ " to entity.");
