@@ -33,12 +33,12 @@ public class NPCBinder extends MyListener {
 	public File getNPCData(String world, int entityId, boolean createIfNotExists) {
 		File f = new File(getWorldFile(world).getPath() + "/" + "NPCData" + "/"
 				+ entityId + ".yml");
+		Bukkit.broadcastMessage(f.getPath());
 		if (createIfNotExists) {
 			if (!f.exists()) {
 				try {
 					if (!f.getParentFile().exists()) {
-						if (f.getParentFile().isDirectory())
-							f.getParentFile().mkdir();
+						f.getParentFile().mkdir();
 					}
 					f.createNewFile();
 				} catch (IOException e) {
