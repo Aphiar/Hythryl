@@ -1,14 +1,18 @@
 package mineward.core.npc;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 
+import mineward.core.Core;
 import mineward.core.listener.MyListener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.ArmorStand;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,6 +22,32 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class NPCBinder extends MyListener {
 
 	public static HashMap<UUID, String> ToBind = new HashMap<>();
+
+	public File getWorldFile(String world) {
+		return new File(new File(Core.class.getProtectionDomain()
+				.getCodeSource().getLocation().getPath()).getParentFile()
+				.getParentFile().getPath()
+				+ "/" + world);
+	}
+
+	public File getNPCData(String world, int entityId, boolean createIfNotExists) {
+		File f = new File(getWorldFile(world).getPath() + "/" + "NPCData" + "/"
+				+ entityId + ".yml");
+		if (createIfNotExists) {
+			if (!f.exists()) {
+				try {
+					if (!f.getParentFile().exists()) {
+						if (f.getParentFile().isDirectory())
+							f.getParentFile().mkdir();
+					}
+					f.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return f;
+	}
 
 	public NPCBinder() {
 		super("NPC Binder");
@@ -36,65 +66,26 @@ public class NPCBinder extends MyListener {
 		Entity ent = e.getRightClicked();
 		if (ToBind.containsKey(p.getUniqueId())) {
 			String cmd = ToBind.get(p.getUniqueId());
-			ArmorStand as = ent.getWorld().spawn(ent.getLocation(),
-					ArmorStand.class);
-			as.setCustomNameVisible(false);
-			as.setCustomName(ent.getEntityId() + "§;" + cmd);
-			as.setGravity(false);
-			as.setArms(false);
-			as.setBasePlate(false);
-			as.setVisible(false);
-			as.setSmall(true);
-			as.setRemoveWhenFarAway(false);
-			if (ent.getPassenger() == null) {
-				as.teleport(ent.getLocation());
-			} else {
-				Entity tallest = ent.getPassenger();
-				while (tallest.getPassenger() != null) {
-					tallest = tallest.getPassenger();
-				}
-				tallest.setPassenger(as);
-			}
-			p.sendMessage(ChatColor.GREEN + "Successfully bound command " + cmd
+			File f = getNPCData(p.getWorld().getName(), ent.getEntityId(), true);
+			FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
+			cfg.set("Command", cmd);
+			cfg.set("RunAsPlayer", cmd.contains("(OPEN_PLAYER)"));
+			p.sendMessage(ChatColor.GREEN + "Successfully bound command "
+					+ ChatColor.RED + "/" + cmd + ChatColor.GREEN
 					+ " to entity.");
 			ToBind.remove(p.getUniqueId());
 			e.setCancelled(true);
 			return;
 		}
-		String cmd = null;
-		if (ent.getPassenger() == null) {
-			for (Entity ne : ent.getNearbyEntities(1, 1, 1)) {
-				if (!(ne.getCustomName().contains("§;")))
-					continue;
-				if (ne.getLocation().getX() == ent.getLocation().getX()
-						&& ne.getLocation().getY() == ent.getLocation().getY()
-						&& ne.getLocation().getZ() == ent.getLocation().getZ()
-						&& ne instanceof ArmorStand
-						&& Integer.valueOf(ne.getCustomName().split("§;")[0])
-								.intValue() == ent.getEntityId()) {
-					cmd = ne.getCustomName();
-					break;
-				}
-			}
-			if (cmd == null) {
-				return;
-			}
-		}
-		if (cmd == null) {
-			Entity tallest = ent.getPassenger();
-			while (tallest.getPassenger() != null) {
-				tallest = tallest.getPassenger();
-			}
-			cmd = tallest.getCustomName();
-		}
-		if (!(cmd.contains("§;")))
+		File f = getNPCData(p.getWorld().getName(), ent.getEntityId(), false);
+		if (!f.exists())
 			return;
 		CommandSender sender = Bukkit.getConsoleSender();
-		if (cmd.contains("(OPEN_PLAYER)")) {
-			cmd = cmd.replace("(OPEN_PLAYER)", "");
+		FileConfiguration cfg = YamlConfiguration.loadConfiguration(f);
+		String cmd = cfg.getString("Command");
+		if (cfg.getBoolean("RunAsPlayer"))
 			sender = p;
-		}
-		String command = cmd.split("§;")[1].replace("{p}", p.getName());
+		String command = cmd.replace("{p}", p.getName());
 		Bukkit.getServer().dispatchCommand(sender, command);
 		e.setCancelled(true);
 	}
