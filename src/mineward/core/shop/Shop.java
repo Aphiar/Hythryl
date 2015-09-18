@@ -66,6 +66,10 @@ public class Shop implements Listener {
 		return mat;
 	}
 
+	public void setRupees(boolean b) {
+		this.rupees = b;
+	}
+
 	public String getEconomy() {
 		return rupees ? "Rupees" : "Coins";
 	}
