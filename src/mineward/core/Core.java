@@ -132,8 +132,7 @@ public class Core extends JavaPlugin {
 				Rank rank = HPlayer.o(pl).getRank();
 				Team team = SBManager.getTeam(p, rank.name());
 				if (rank != Rank.Default) {
-					team.setPrefix(rank.getLabel(true, true) + ChatColor.GRAY
-							+ " ");
+					team.setPrefix(rank.getLabel(true) + ChatColor.GRAY + " ");
 				} else {
 					team.setPrefix(ChatColor.GRAY + "");
 				}

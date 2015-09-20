@@ -105,9 +105,9 @@ public class ChatListener extends MyListener {
 				msg = ChatColor.translateAlternateColorCodes('&', msg);
 			}
 			e.setFormat(ChatColor.GRAY + "[" + UtilLevel.getColor(level)
-					+ level + ChatColor.GRAY + "]" + " "
-					+ rank.getLabel(true, true) + " " + name + ChatColor.GRAY
-					+ ": " + ChatColor.WHITE + msg);
+					+ level + ChatColor.GRAY + "]" + " " + rank.getLabel(true)
+					+ " " + name + ChatColor.GRAY + ": " + ChatColor.WHITE
+					+ msg);
 		}
 		new ChatAchievement().Complete(p, true);
 	}

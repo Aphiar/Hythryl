@@ -82,8 +82,7 @@ public class JoinListener extends MyListener {
 				Rank rank = HPlayer.o(pls).getRank();
 				Team team = SBManager.getTeam(pl, rank.name());
 				if (rank != Rank.Default) {
-					team.setPrefix(rank.getLabel(true, true) + ChatColor.GRAY
-							+ " ");
+					team.setPrefix(rank.getLabel(true) + ChatColor.GRAY + " ");
 				} else {
 					team.setPrefix(ChatColor.GRAY + "");
 				}
@@ -92,10 +91,13 @@ public class JoinListener extends MyListener {
 			}
 		}
 
-		IChatBaseComponent header = ChatSerializer
-				.a(ChatColor.translateAlternateColorCodes('&', "{text:\"&6&lHythryl Network\"}"));
+		IChatBaseComponent header = ChatSerializer.a(ChatColor
+				.translateAlternateColorCodes('&',
+						"{text:\"&6&lHythryl Network\"}"));
 		IChatBaseComponent footer = ChatSerializer
-				.a(ChatColor.translateAlternateColorCodes('&', "{text:\"You're playing on &bplay.hythryl.com\n&fWebsite: &awww.hythryl.com\"}"));
+				.a(ChatColor
+						.translateAlternateColorCodes('&',
+								"{text:\"You're playing on &bplay.hythryl.com\n&fWebsite: &awww.hythryl.com\"}"));
 		PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter(
 				header);
 		try {

@@ -53,8 +53,7 @@ public class F {
 	}
 
 	public static void help(Player p, String cmd, String desc, Rank rank) {
-		String rankMSG = rank == null ? "" : " [" + rank.getLabel(false, true)
-				+ ChatColor.GRAY + "]";
+		String rankMSG = rank == null ? "" : " " + rank.getLabel(false);
 		p.sendMessage(ChatColor.GREEN + "/" + cmd + ChatColor.GRAY + ": "
 				+ desc + rankMSG);
 	}

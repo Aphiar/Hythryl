@@ -51,16 +51,14 @@ public class PromoteCMD extends MyCommand {
 					+ "';");
 			if (Bukkit.getOfflinePlayer(args[0]).isOnline()) {
 				HPlayer.o(Bukkit.getPlayer(args[0])).setRank(rank);
-				F.message(
-						Bukkit.getPlayer(args[0]),
-						"Hierarchy",
+				F.message(Bukkit.getPlayer(args[0]), "Hierarchy",
 						C.STR_PLAYER + p.getName() + C.STR_MAIN
-								+ " promoted you to "
-								+ rank.getLabel(true, true) + C.STR_MAIN + ".");
+								+ " promoted you to " + rank.getLabel(true)
+								+ C.STR_MAIN + ".");
 			}
 			F.message(p, "Hierarchy", "You promoted " + C.STR_PLAYER + args[0]
-					+ C.STR_MAIN + " to " + rank.getLabel(true, true)
-					+ C.STR_MAIN + ".");
+					+ C.STR_MAIN + " to " + rank.getLabel(true) + C.STR_MAIN
+					+ ".");
 		}
 	}
 

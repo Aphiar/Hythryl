@@ -42,8 +42,8 @@ public class ClassCMD extends MyCommand {
 				return;
 			}
 			F.message(p, "Hierarchy", C.STR_PLAYER + args[0] + C.STR_MAIN
-					+ "'s rank is " + acc.rank.getLabel(true, true)
-					+ C.STR_MAIN + ".");
+					+ "'s rank is " + acc.rank.getLabel(true) + C.STR_MAIN
+					+ ".");
 			return;
 		} else if (args.length == 2) {
 			Account acc = AccountManager.getAccount(
@@ -76,10 +76,10 @@ public class ClassCMD extends MyCommand {
 				HPlayer.o(Bukkit.getPlayer(args[0])).setRank(rank);
 				F.message(Bukkit.getPlayer(args[0]), "Hierarchy", C.STR_PLAYER
 						+ p.getName() + C.STR_MAIN + " set your rank to "
-						+ rank.getLabel(true, true) + C.STR_MAIN + ".");
+						+ rank.getLabel(true) + C.STR_MAIN + ".");
 			}
 			F.message(p, "Hierarchy", "You set " + C.STR_PLAYER + args[0]
-					+ C.STR_MAIN + "'s rank to " + rank.getLabel(true, true)
+					+ C.STR_MAIN + "'s rank to " + rank.getLabel(true)
 					+ C.STR_MAIN + ".");
 		}
 	}

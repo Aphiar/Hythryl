@@ -13,8 +13,7 @@ import org.bukkit.entity.Player;
 public class HelpdeskReplyCMD extends MyCommand {
 
 	public HelpdeskReplyCMD() {
-		super("hr", new String[] {}, "Reply to a helpdesk request",
-				Rank.Jrmod);
+		super("hr", new String[] {}, "Reply to a helpdesk request", Rank.Jrmod);
 	}
 
 	@Override
@@ -37,21 +36,20 @@ public class HelpdeskReplyCMD extends MyCommand {
 			msg += args[args.length - 1];
 			Bukkit.getPlayer(args[0]).sendMessage(
 					ChatColor.BOLD + ">> [HD] "
-							+ HPlayer.o(p).getRank().getLabel(false, true)
-							+ " " + HPlayer.o(p).getRank().getColor()
-							+ p.getName() + ": " + ChatColor.DARK_AQUA + msg);
+							+ HPlayer.o(p).getRank().getLabel(false) + " "
+							+ HPlayer.o(p).getRank().getColor() + p.getName()
+							+ ": " + ChatColor.DARK_AQUA + msg);
 			for (Player pl : Bukkit.getOnlinePlayers()) {
-				if ((HPlayer.o(pl).getRank()
-						.isPermissible(Rank.Jrmod))
+				if ((HPlayer.o(pl).getRank().isPermissible(Rank.Jrmod))
 						&& (!(pl.getUniqueId().equals(Bukkit.getPlayer(args[0])
 								.getUniqueId())))) {
 					pl.sendMessage(ChatColor.BOLD + "<-" + ChatColor.GREEN
 							+ Bukkit.getPlayer(args[0]).getName()
 							+ ChatColor.WHITE + "" + ChatColor.BOLD
 							+ " >> [HD] "
-							+ HPlayer.o(p).getRank().getLabel(false, true)
-							+ " " + HPlayer.o(p).getRank().getColor()
-							+ p.getName() + ": " + ChatColor.DARK_AQUA + msg);
+							+ HPlayer.o(p).getRank().getLabel(false) + " "
+							+ HPlayer.o(p).getRank().getColor() + p.getName()
+							+ ": " + ChatColor.DARK_AQUA + msg);
 				}
 			}
 		}

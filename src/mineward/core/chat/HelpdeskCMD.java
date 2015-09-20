@@ -34,7 +34,7 @@ public class HelpdeskCMD extends MyCommand implements Muteable {
 				if ((HPlayer.o(pl).getRank().isPermissible(Rank.Jrmod))
 						|| (p.getUniqueId().equals(pl.getUniqueId()))) {
 					pl.sendMessage(ChatColor.BOLD + "[HD] "
-							+ HPlayer.o(p).getRank().getLabel(false, true)
+							+ HPlayer.o(p).getRank().getLabel(false)
 							+ HPlayer.o(p).getRank().getColor() + " "
 							+ p.getName() + ": " + ChatColor.DARK_AQUA + msg);
 				}

@@ -80,8 +80,7 @@ public class StatsGUI extends MyListener {
 					null,
 					ChatColor.RED + "Punishment Record",
 					new String[] {
-							Rank.Jrmod.getLabel(true, true) + ChatColor.GRAY
-									+ "+",
+							Rank.Jrmod.getLabel(true) + ChatColor.GRAY + "+",
 							ChatColor.GRAY
 									+ "View this player's punishment record." },
 					new ItemStack(Material.LAVA_BUCKET, 1), 17));
@@ -453,7 +452,7 @@ public class StatsGUI extends MyListener {
 				new String[] { ls1, ls2 }, new ItemStack(Material.COMPASS, 1),
 				30));
 		gui.AddButton(new Button(null, ChatColor.YELLOW + "Rank: ",
-				new String[] { rank.getLabel(true, true) }, new ItemStack(
+				new String[] { rank.getLabel(true) }, new ItemStack(
 						Material.NAME_TAG, 1), 40));
 		gui.AddButton(new Button(null, ChatColor.YELLOW + "Money: ",
 				new String[] { money + " Coins" }, new ItemStack(

@@ -34,7 +34,7 @@ public class BroadcastCMD extends MyCommand {
 				target.sendMessage(new String[] {
 						darkredline,
 						ChatColor.GRAY + "Server Message From "
-								+ HPlayer.o(p).getRank().getLabel(false, true)
+								+ HPlayer.o(p).getRank().getLabel(false)
 								+ ChatColor.GREEN + " " + p.getName()
 								+ ChatColor.GRAY + ":",
 						ChatColor.YELLOW + "  " + msg, darkredline });

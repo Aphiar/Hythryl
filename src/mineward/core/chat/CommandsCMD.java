@@ -26,7 +26,7 @@ public class CommandsCMD extends MyCommand {
 				if (i == command.getRank().ordinal()) {
 					p.sendMessage(ChatColor.GOLD + "/" + command.getLabel()
 							+ ChatColor.GRAY + " ("
-							+ command.getRank().getLabel(false, true)
+							+ command.getRank().getLabel(false)
 							+ ChatColor.GRAY + "): " + command.getDescription());
 				}
 			}
