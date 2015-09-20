@@ -82,7 +82,7 @@ public class JoinListener extends MyListener {
 				Rank rank = HPlayer.o(pls).getRank();
 				Team team = SBManager.getTeam(pl, rank.name());
 				if (rank != Rank.Default) {
-					team.setPrefix(rank.getLabel(true) + ChatColor.GRAY + " ");
+					team.setPrefix(rank.getLabel(true) + " ");
 				} else {
 					team.setPrefix(ChatColor.GRAY + "");
 				}
