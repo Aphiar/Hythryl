@@ -45,7 +45,7 @@ public enum Rank {
 		String name = getName();
 		if (uppercase)
 			name = getName().toUpperCase();
-		return getColor() + "[" + name + "]";
+		return ChatColor.GRAY + "[" + getColor() + name + ChatColor.GRAY + "]";
 	}
 
 	public String getName() {
