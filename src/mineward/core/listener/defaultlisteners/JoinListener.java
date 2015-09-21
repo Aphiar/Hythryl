@@ -49,7 +49,7 @@ public class JoinListener extends MyListener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
-		p.setCustomName(ChatColor.GRAY + p.getName());
+		p.setCustomName(p.getName());
 		if (Database.isConnectionLost()) {
 			e.setJoinMessage(null);
 			p.sendMessage("No database connection. Reloading...");

@@ -126,13 +126,13 @@ public class Core extends JavaPlugin {
 
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			TimeOnline.setOnline(p, now);
-			p.setCustomName(ChatColor.GRAY + p.getName());
+			p.setCustomName(p.getName());
 			SBManager.getScoreboard(p);
 			for (Player pl : Bukkit.getOnlinePlayers()) {
 				Rank rank = HPlayer.o(pl).getRank();
 				Team team = SBManager.getTeam(p, rank.name());
 				if (rank != Rank.Default) {
-					team.setPrefix(rank.getLabel(true) + ChatColor.GRAY + " ");
+					team.setPrefix(rank.getLabel(true) + " ");
 				} else {
 					team.setPrefix(ChatColor.GRAY + "");
 				}

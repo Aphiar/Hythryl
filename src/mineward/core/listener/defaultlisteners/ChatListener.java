@@ -36,7 +36,7 @@ public class ChatListener extends MyListener {
 		Player p = e.getPlayer();
 		String msg = e.getMessage();
 		if (p.getCustomName() == null) {
-			p.setCustomName("§7" + p.getName());
+			p.setCustomName(p.getName());
 		}
 		String name = p.getCustomName();
 		Rank rank = Rank.Default;
@@ -106,8 +106,7 @@ public class ChatListener extends MyListener {
 			}
 			e.setFormat(ChatColor.GRAY + "[" + UtilLevel.getColor(level)
 					+ level + ChatColor.GRAY + "]" + " " + rank.getLabel(true)
-					+ " " + name + ChatColor.GRAY + ": " + ChatColor.WHITE
-					+ msg);
+					+ " " + name + ": " + ChatColor.WHITE + msg);
 		}
 		new ChatAchievement().Complete(p, true);
 	}
