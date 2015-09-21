@@ -48,6 +48,8 @@ public class ChatListener extends MyListener {
 		if (staffChat.contains(p.getUniqueId())) {
 			e.setCancelled(true);
 			for (UUID uuid : staffChat) {
+				if (!Bukkit.getOfflinePlayer(uuid).isOnline())
+					continue;
 				Player pl = Bukkit.getPlayer(uuid);
 				pl.sendMessage(ChatColor.AQUA + "[STAFF] " + ChatColor.GREEN
 						+ rank.getName() + " " + p.getName() + ": "
