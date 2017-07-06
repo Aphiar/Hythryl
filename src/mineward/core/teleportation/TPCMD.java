@@ -1,5 +1,6 @@
 package mineward.core.teleportation;
 
+import mineward.core.command.HostCommand;
 import mineward.core.command.MyCommand;
 import mineward.core.common.Rank;
 import mineward.core.common.utils.C;
@@ -9,7 +10,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class TPCMD extends MyCommand {
+public class TPCMD extends MyCommand implements HostCommand {
 
     public TPCMD() {
         super("tp", new String[0], "Teleport to another player", Rank.Jrmod);

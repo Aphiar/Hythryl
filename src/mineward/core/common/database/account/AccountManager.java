@@ -10,109 +10,109 @@ import mineward.core.common.Rank;
 
 public class AccountManager {
 
-	public static boolean hasAccount(String uuid) {
-		try {
-			boolean hasaccount = false;
-			PreparedStatement statement = Database.getConnection()
-					.prepareStatement(
-							"SELECT * FROM `Account` WHERE `uuid`='" + uuid
-									+ "';");
-			ResultSet rs = statement.executeQuery();
-			if (rs.next()) {
-				hasaccount = true;
-			}
-			rs.close();
-			statement.close();
-			return hasaccount;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+    public static boolean hasAccount(String uuid) {
+        try {
+            boolean hasaccount = false;
+            PreparedStatement statement = Database.getConnection()
+                    .prepareStatement(
+                            "SELECT * FROM `Account` WHERE `uuid`='" + uuid
+                                    + "';");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                hasaccount = true;
+            }
+            rs.close();
+            statement.close();
+            return hasaccount;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
-	public static Account getAccount(String uuid,
-			boolean createAccountIfNotExists) {
-		try {
-			boolean hasaccount = false;
-			Rank rank = Rank.Default;
-			int money = 0;
-			Timestamp firstjoined = null;
-			long timeonline = 0;
-			long lastseen = 0;
-			long xp = 0;
-			HashMap<String, Integer> moneyTypes = new HashMap<String, Integer>();
-			PreparedStatement statement = Database.getConnection()
-					.prepareStatement(
-							"SELECT * FROM `Account` WHERE `uuid`='" + uuid
-									+ "';");
-			ResultSet rs = statement.executeQuery();
-			if (rs.next()) {
-				hasaccount = true;
-				rank = Rank.valueOf(rs.getString("rank"));
-				money = rs.getInt("money");
-				firstjoined = rs.getTimestamp("firstjoined");
-				timeonline = rs.getLong("timeonline");
-				lastseen = rs.getLong("lastseen");
-				xp = rs.getLong("xp");
-				moneyTypes.put("rupees", rs.getInt("rupees"));
-				moneyTypes.put("credit", rs.getInt("credit"));
-			}
-			rs.close();
-			statement.close();
-			if (!hasaccount) {
-				if (createAccountIfNotExists) {
-					firstjoined = new Timestamp(System.currentTimeMillis());
-					PreparedStatement s2 = Database
-							.getConnection()
-							.prepareStatement(
-									"INSERT INTO `Account`(`uuid`,`rank`,`money`,`firstjoined`,`timeonline`,`lastseen`,`xp`) VALUES('"
-											+ uuid
-											+ "','"
-											+ rank.name()
-											+ "','0','"
-											+ firstjoined
-											+ "','0','0','0');");
-					s2.executeUpdate();
-					s2.close();
-					return new AccountManager().new Account(uuid, rank, 0,
-							firstjoined, 0, 0, 0, null);
-				}
-				return null;
-			}
-			return new AccountManager().new Account(uuid, rank, money,
-					firstjoined, timeonline, lastseen, xp, moneyTypes);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+    public static Account getAccount(String uuid,
+                                     boolean createAccountIfNotExists) {
+        try {
+            boolean hasaccount = false;
+            Rank rank = Rank.Default;
+            int money = 0;
+            Timestamp firstjoined = null;
+            long timeonline = 0;
+            long lastseen = 0;
+            long xp = 0;
+            HashMap<String, Integer> moneyTypes = new HashMap<String, Integer>();
+            PreparedStatement statement = Database.getConnection()
+                    .prepareStatement(
+                            "SELECT * FROM `Account` WHERE `uuid`='" + uuid
+                                    + "';");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                hasaccount = true;
+                rank = Rank.valueOf(rs.getString("rank"));
+                money = rs.getInt("money");
+                firstjoined = rs.getTimestamp("firstjoined");
+                timeonline = rs.getLong("timeonline");
+                lastseen = rs.getLong("lastseen");
+                xp = rs.getLong("xp");
+                moneyTypes.put("rupees", rs.getInt("rupees"));
+                moneyTypes.put("credit", rs.getInt("credit"));
+            }
+            rs.close();
+            statement.close();
+            if (!hasaccount) {
+                if (createAccountIfNotExists) {
+                    firstjoined = new Timestamp(System.currentTimeMillis());
+                    PreparedStatement s2 = Database
+                            .getConnection()
+                            .prepareStatement(
+                                    "INSERT INTO `Account`(`uuid`,`rank`,`money`,`firstjoined`,`timeonline`,`lastseen`,`xp`) VALUES('"
+                                            + uuid
+                                            + "','"
+                                            + rank.name()
+                                            + "','0','"
+                                            + firstjoined
+                                            + "','0','0','0');");
+                    s2.executeUpdate();
+                    s2.close();
+                    return new AccountManager().new Account(uuid, rank, 0,
+                            firstjoined, 0, 0, 0, null);
+                }
+                return null;
+            }
+            return new AccountManager().new Account(uuid, rank, money,
+                    firstjoined, timeonline, lastseen, xp, moneyTypes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-	public class Account {
+    public class Account {
 
-		public String uuid;
-		public Rank rank;
-		public int money;
-		public Timestamp firstjoined;
-		public long timeonline;
-		public long lastseen;
-		public long xp;
-		public HashMap<String, Integer> moneyTypes;
+        public String uuid;
+        public Rank rank;
+        public int money;
+        public Timestamp firstjoined;
+        public long timeonline;
+        public long lastseen;
+        public long xp;
+        public HashMap<String, Integer> moneyTypes;
 
-		public Account(String uuid, Rank rank, int money,
-				Timestamp firstjoined, long timeonline, long lastseen, long xp,
-				HashMap<String, Integer> moneyTypes) {
-			this.uuid = uuid;
-			this.rank = rank;
-			this.money = money;
-			this.firstjoined = firstjoined;
-			this.timeonline = timeonline;
-			this.lastseen = lastseen;
-			this.xp = xp;
-			this.moneyTypes = moneyTypes;
-			if (moneyTypes == null)
-				this.moneyTypes = new HashMap<String, Integer>();
-		}
+        public Account(String uuid, Rank rank, int money,
+                       Timestamp firstjoined, long timeonline, long lastseen, long xp,
+                       HashMap<String, Integer> moneyTypes) {
+            this.uuid = uuid;
+            this.rank = rank;
+            this.money = money;
+            this.firstjoined = firstjoined;
+            this.timeonline = timeonline;
+            this.lastseen = lastseen;
+            this.xp = xp;
+            this.moneyTypes = moneyTypes;
+            if (moneyTypes == null)
+                this.moneyTypes = new HashMap<String, Integer>();
+        }
 
-	}
+    }
 
 }

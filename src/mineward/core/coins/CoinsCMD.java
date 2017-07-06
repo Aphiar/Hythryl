@@ -74,7 +74,7 @@ public class CoinsCMD extends MyCommand {
                     F.message(p, "Error", args[1] + " is not a number (or is too big)!");
                 }
                 return;
-            } else if(args.length == 3) {
+            } else if (args.length == 3) {
                 try {
                     OfflinePlayer player = Bukkit.getOfflinePlayer(args[1]);
                     int removeamount = Integer.valueOf(args[2]);

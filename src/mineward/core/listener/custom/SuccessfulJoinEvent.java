@@ -6,28 +6,28 @@ import org.bukkit.event.HandlerList;
 
 public class SuccessfulJoinEvent extends Event {
 
-	private Player p;
+    private Player p;
 
-	public SuccessfulJoinEvent(Player p) {
-		this.p = p;
-	}
+    public SuccessfulJoinEvent(Player p) {
+        this.p = p;
+    }
 
-	public Player getPlayer() {
-		return p;
-	}
+    public Player getPlayer() {
+        return p;
+    }
 
-	/**
-	 * HandlerList stuff
-	 */
-	private static final HandlerList handlers = new HandlerList();
+    /**
+     * HandlerList stuff
+     */
+    private static final HandlerList handlers = new HandlerList();
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
 
 }

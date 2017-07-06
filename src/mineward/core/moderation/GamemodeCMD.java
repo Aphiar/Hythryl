@@ -8,11 +8,12 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
-public class GamemodeCMD extends MyCommand {
+public class GamemodeCMD extends MyCommand implements Listener {
 
     public GamemodeCMD() {
-        super("gamemode", new String[] { "gm" }, "Enter a different gamemode.", Rank.Admin);
+        super("gamemode", new String[]{"gm"}, "Enter a different gamemode.", Rank.Admin);
     }
 
     public void execute(Player p, String[] args) {

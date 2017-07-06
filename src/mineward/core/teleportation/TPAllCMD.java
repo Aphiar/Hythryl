@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class TPAllCMD extends MyCommand {
 
     public TPAllCMD() {
-        super("tpall", new String[] { "teleportall" }, "Teleport all players to yourself!", Rank.Admin);
+        super("tpall", new String[]{"teleportall"}, "Teleport all players to yourself!", Rank.Admin);
     }
 
     public void execute(Player p, String[] args) {

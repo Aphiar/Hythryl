@@ -8,47 +8,47 @@ import org.bukkit.event.HandlerList;
 
 public class MinewardPlayerChatEvent extends Event {
 
-	private Player p;
-	private String msg;
-	private List<Player> recipients;
+    private Player p;
+    private String msg;
+    private List<Player> recipients;
 
-	public MinewardPlayerChatEvent(Player p, String msg, List<Player> recipients) {
-		this.p = p;
-		this.msg = msg;
-		this.recipients = recipients;
-	}
+    public MinewardPlayerChatEvent(Player p, String msg, List<Player> recipients) {
+        this.p = p;
+        this.msg = msg;
+        this.recipients = recipients;
+    }
 
-	public Player getPlayer() {
-		return p;
-	}
+    public Player getPlayer() {
+        return p;
+    }
 
-	public String getMessage() {
-		return msg;
-	}
+    public String getMessage() {
+        return msg;
+    }
 
-	public List<Player> getRecipients() {
-		return recipients;
-	}
+    public List<Player> getRecipients() {
+        return recipients;
+    }
 
-	public void setMessage(String msg) {
-		this.msg = msg;
-	}
+    public void setMessage(String msg) {
+        this.msg = msg;
+    }
 
-	public void setRecipients(List<Player> players) {
-		this.recipients = players;
-	}
+    public void setRecipients(List<Player> players) {
+        this.recipients = players;
+    }
 
-	/**
-	 * HandlerList stuff
-	 */
-	private static final HandlerList handlers = new HandlerList();
+    /**
+     * HandlerList stuff
+     */
+    private static final HandlerList handlers = new HandlerList();
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
 }

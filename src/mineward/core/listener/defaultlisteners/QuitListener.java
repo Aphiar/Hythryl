@@ -15,30 +15,30 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class QuitListener extends MyListener {
 
-	public QuitListener() {
-		super("DefaultQuit");
-	}
+    public QuitListener() {
+        super("DefaultQuit");
+    }
 
-	@EventHandler
-	public void onQuit(PlayerQuitEvent e) {
-		Player p = e.getPlayer();
-		HPlayer player = HPlayer.o(p);
-		TimeOnline.uploadToDatabase(p);
-		TimeOnline.setOffline(p);
+    @EventHandler
+    public void onQuit(PlayerQuitEvent e) {
+        Player p = e.getPlayer();
+        HPlayer player = HPlayer.o(p);
+        TimeOnline.uploadToDatabase(p);
+        TimeOnline.setOffline(p);
 
-		e.setQuitMessage(null);
+        e.setQuitMessage(null);
 
-		long millis = System.currentTimeMillis();
+        long millis = System.currentTimeMillis();
 
-		Database.runUpdateStatement("UPDATE `Account` SET `lastseen`='"
-				+ millis + "' WHERE `uuid`='" + p.getUniqueId().toString()
-				+ "';");
+        Database.runUpdateStatement("UPDATE `Account` SET `lastseen`='"
+                + millis + "' WHERE `uuid`='" + p.getUniqueId().toString()
+                + "';");
 
-		System.out.println(new Timestamp(millis).toString());
+        System.out.println(new Timestamp(millis).toString());
 
-		Core.RemovePlayer(player);
+        Core.RemovePlayer(player);
 
-		SBManager.removeBoard(p);
-	}
+        SBManager.removeBoard(p);
+    }
 
 }

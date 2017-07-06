@@ -1,5 +1,6 @@
 package mineward.core.teleportation;
 
+import mineward.core.command.HostCommand;
 import mineward.core.command.MyCommand;
 import mineward.core.common.Rank;
 import mineward.core.common.utils.C;
@@ -7,7 +8,7 @@ import mineward.core.common.utils.F;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-public class TPHereCMD extends MyCommand {
+public class TPHereCMD extends MyCommand implements HostCommand {
 
     public TPHereCMD() {
         super("tphere", new String[0], "Teleport a player to you!", Rank.Admin);

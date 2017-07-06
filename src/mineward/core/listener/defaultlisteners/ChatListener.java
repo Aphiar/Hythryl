@@ -25,92 +25,92 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class ChatListener extends MyListener {
 
-	public ChatListener() {
-		super("DefaultChat");
-	}
+    public ChatListener() {
+        super("DefaultChat");
+    }
 
-	public static ArrayList<UUID> staffChat = new ArrayList<UUID>();
+    public static ArrayList<UUID> staffChat = new ArrayList<UUID>();
 
-	@EventHandler
-	public void onChat(AsyncPlayerChatEvent e) {
-		Player p = e.getPlayer();
-		String msg = e.getMessage();
-		if (p.getCustomName() == null) {
-			p.setCustomName(p.getName());
-		}
-		String name = p.getCustomName();
-		Rank rank = Rank.Default;
-		try {
-			rank = HPlayer.o(p).getRank();
-		} catch (Exception ex) {
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent e) {
+        Player p = e.getPlayer();
+        String msg = e.getMessage();
+        if (p.getCustomName() == null) {
+            p.setCustomName(p.getName());
+        }
+        String name = p.getCustomName();
+        Rank rank = Rank.Default;
+        try {
+            rank = HPlayer.o(p).getRank();
+        } catch (Exception ex) {
 
-		}
-		if (staffChat.contains(p.getUniqueId())) {
-			e.setCancelled(true);
-			for (UUID uuid : staffChat) {
-				if (!Bukkit.getOfflinePlayer(uuid).isOnline())
-					continue;
-				Player pl = Bukkit.getPlayer(uuid);
-				pl.sendMessage(ChatColor.AQUA + "[STAFF] " + ChatColor.GREEN
-						+ rank.getName() + " " + p.getName() + ": "
-						+ ChatColor.LIGHT_PURPLE + msg);
-			}
-			for (Player pl : Bukkit.getOnlinePlayers()) {
-				if (!(staffChat.contains(pl.getUniqueId()))) {
-					if (HPlayer.o(pl).getRank().isPermissible(Rank.Jrmod)) {
-						pl.sendMessage(ChatColor.AQUA + "[STAFF] "
-								+ ChatColor.GREEN + rank.getName() + " "
-								+ p.getName() + ": " + ChatColor.LIGHT_PURPLE
-								+ msg);
-					}
-				}
-			}
-			return;
-		}
-		Punishment pun = Punish.getActiveMutePunishment(p.getUniqueId());
-		if (pun != null) {
-			e.setCancelled(true);
-			String time = pun.time == -1 ? "Forever" : TimeUtil
-					.toString((pun.time + pun.timepunished)
-							- System.currentTimeMillis());
-			F.message(p, PrefixColor.Important, C.STR_PLAYER + pun.punisher
-					+ C.STR_MAIN + " forbids you from speaking for "
-					+ C.STR_ELEMENT + time + C.STR_MAIN + " because you were "
-					+ C.STR_ELEMENT + pun.reason);
-			return;
-		}
+        }
+        if (staffChat.contains(p.getUniqueId())) {
+            e.setCancelled(true);
+            for (UUID uuid : staffChat) {
+                if (!Bukkit.getOfflinePlayer(uuid).isOnline())
+                    continue;
+                Player pl = Bukkit.getPlayer(uuid);
+                pl.sendMessage(ChatColor.AQUA + "[STAFF] " + ChatColor.GREEN
+                        + rank.getName() + " " + p.getName() + ": "
+                        + ChatColor.LIGHT_PURPLE + msg);
+            }
+            for (Player pl : Bukkit.getOnlinePlayers()) {
+                if (!(staffChat.contains(pl.getUniqueId()))) {
+                    if (HPlayer.o(pl).getRank().isPermissible(Rank.Jrmod)) {
+                        pl.sendMessage(ChatColor.AQUA + "[STAFF] "
+                                + ChatColor.GREEN + rank.getName() + " "
+                                + p.getName() + ": " + ChatColor.LIGHT_PURPLE
+                                + msg);
+                    }
+                }
+            }
+            return;
+        }
+        Punishment pun = Punish.getActiveMutePunishment(p.getUniqueId());
+        if (pun != null) {
+            e.setCancelled(true);
+            String time = pun.time == -1 ? "Forever" : TimeUtil
+                    .toString((pun.time + pun.timepunished)
+                            - System.currentTimeMillis());
+            F.message(p, PrefixColor.Important, C.STR_PLAYER + pun.punisher
+                    + C.STR_MAIN + " forbids you from speaking for "
+                    + C.STR_ELEMENT + time + C.STR_MAIN + " because you were "
+                    + C.STR_ELEMENT + pun.reason);
+            return;
+        }
 
-		ArrayList<String> bannedwords = UtilFilter.getBannedWords();
+        ArrayList<String> bannedwords = UtilFilter.getBannedWords();
 
-		for (String words : bannedwords) {
-			if (msg.contains(words)) {
-				e.setCancelled(true);
-				F.message(p, "Chat",
-						"Please do not swear! It is against the rules!");
-				return;
-			}
-		}
+        for (String words : bannedwords) {
+            if (msg.toLowerCase().contains(words.toLowerCase())) {
+                e.setCancelled(true);
+                F.message(p, "Chat",
+                        "Please do not swear! It is against the rules!");
+                return;
+            }
+        }
 
-		msg = msg.replace("%", "%%");
-		if (msg.toUpperCase().startsWith("SIRI")) {
-			HythrylBot.Siri(p, msg);
-			e.setCancelled(true);
-			return;
-		}
-		int level = UtilLevel.getLevel(HPlayer.o(p).getXP());
-		if (rank.equals(Rank.Default)) {
-			e.setFormat(ChatColor.GRAY + "[" + UtilLevel.getColor(level)
-					+ level + ChatColor.GRAY + "]" + " " + name
-					+ ChatColor.GRAY + ": " + ChatColor.WHITE + msg);
-		} else {
-			if (rank.isPermissible(Rank.Admin)) {
-				msg = ChatColor.translateAlternateColorCodes('&', msg);
-			}
-			e.setFormat(ChatColor.GRAY + "[" + UtilLevel.getColor(level)
-					+ level + ChatColor.GRAY + "]" + " " + rank.getLabel(true)
-					+ " " + name + ": " + ChatColor.WHITE + msg);
-		}
-		new ChatAchievement().Complete(p, true);
-	}
+        msg = msg.replace("%", "%%");
+        if (msg.toUpperCase().startsWith("SIRI")) {
+            HythrylBot.Siri(p, msg);
+            e.setCancelled(true);
+            return;
+        }
+        int level = UtilLevel.getLevel(HPlayer.o(p).getXP());
+        if (rank.equals(Rank.Default)) {
+            e.setFormat(ChatColor.GRAY + "[" + UtilLevel.getColor(level)
+                    + level + ChatColor.GRAY + "]" + " " + name
+                    + ChatColor.GRAY + ": " + ChatColor.WHITE + msg);
+        } else {
+            if (rank.isPermissible(Rank.Admin)) {
+                msg = ChatColor.translateAlternateColorCodes('&', msg);
+            }
+            e.setFormat(ChatColor.GRAY + "[" + UtilLevel.getColor(level)
+                    + level + ChatColor.GRAY + "]" + " " + rank.getLabel(true)
+                    + " " + name + ": " + ChatColor.WHITE + msg);
+        }
+        new ChatAchievement().Complete(p, true);
+    }
 
 }

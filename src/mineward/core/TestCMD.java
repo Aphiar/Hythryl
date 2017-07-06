@@ -10,23 +10,23 @@ import org.bukkit.entity.Player;
 
 public class TestCMD extends mineward.core.command.MyCommand {
 
-	public TestCMD() {
-		super("br", new String[] { "broadcast" }, "Broadcast a message",
-				Rank.Default);
-	}
+    public TestCMD() {
+        super("br", new String[]{"broadcast"}, "Broadcast a message",
+                Rank.Default);
+    }
 
-	public void execute(Player p, String[] args) {
-		if (args.length == 0) {
-			F.message(p, PrefixColor.Easy,
-					"Correct Usage: " + F.elem(C.STR_ELEMENT, "/br <message>"));
-			return;
-		}
-		String reason = "";
-		for (String arg : args) {
-			reason += arg + " ";
-		}
-		reason = reason.substring(0, reason.length() - 1);
-		F.broadcastRaw(ChatColor.translateAlternateColorCodes('&', reason));
-	}
+    public void execute(Player p, String[] args) {
+        if (args.length == 0) {
+            F.message(p, PrefixColor.Easy,
+                    "Correct Usage: " + F.elem(C.STR_ELEMENT, "/br <message>"));
+            return;
+        }
+        String reason = "";
+        for (String arg : args) {
+            reason += arg + " ";
+        }
+        reason = reason.substring(0, reason.length() - 1);
+        F.broadcastRaw(ChatColor.translateAlternateColorCodes('&', reason));
+    }
 
 }

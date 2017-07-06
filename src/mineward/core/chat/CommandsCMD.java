@@ -11,26 +11,26 @@ import org.bukkit.entity.Player;
 
 public class CommandsCMD extends MyCommand {
 
-	public CommandsCMD() {
-		super("help", new String[] { "?", "bukkit:help", "minecraft:help",
-				"bukkit:?", "minecraft:?", "cmds", "cmd", "command" },
-				"View all of the commands you are able to use", Rank.Default);
-	}
+    public CommandsCMD() {
+        super("help", new String[]{"?", "bukkit:help", "minecraft:help",
+                        "bukkit:?", "minecraft:?", "cmds", "cmd", "command"},
+                "View all of the commands you are able to use", Rank.Default);
+    }
 
-	@Override
-	public void execute(Player p, String[] args) {
-		F.message(p, "Help", "Command Help: ");
-		for (int i = (Rank.values().length - 1); i >= HPlayer.o(p).getRank()
-				.ordinal(); i--) {
-			for (MyCommand command : CommandCenter.CommandMap) {
-				if (i == command.getRank().ordinal()) {
-					p.sendMessage(ChatColor.GOLD + "/" + command.getLabel()
-							+ ChatColor.GRAY + " ("
-							+ command.getRank().getLabel(false)
-							+ ChatColor.GRAY + "): " + command.getDescription());
-				}
-			}
-		}
-	}
+    @Override
+    public void execute(Player p, String[] args) {
+        F.message(p, "Help", "Command Help: ");
+        for (int i = (Rank.values().length - 1); i >= HPlayer.o(p).getRank()
+                .ordinal(); i--) {
+            for (MyCommand command : CommandCenter.CommandMap) {
+                if (i == command.getRank().ordinal()) {
+                    p.sendMessage(ChatColor.GOLD + "/" + command.getLabel()
+                            + ChatColor.GRAY + " ("
+                            + command.getRank().getLabel(false)
+                            + ChatColor.GRAY + "): " + command.getDescription());
+                }
+            }
+        }
+    }
 
 }

@@ -5,40 +5,40 @@ import org.bukkit.event.HandlerList;
 
 public class CooldownFinishEvent extends Event {
 
-	private String cfor;
-	private String data;
-	private long time;
+    private String cfor;
+    private String data;
+    private long time;
 
-	public CooldownFinishEvent(String cfor, String data, long time) {
-		this.cfor = cfor;
-		this.data = data;
-		this.time = time;
-	}
+    public CooldownFinishEvent(String cfor, String data, long time) {
+        this.cfor = cfor;
+        this.data = data;
+        this.time = time;
+    }
 
-	public String getFor() {
-		return cfor;
-	}
+    public String getFor() {
+        return cfor;
+    }
 
-	public String getData() {
-		return data;
-	}
+    public String getData() {
+        return data;
+    }
 
-	public long getTime() {
-		return time;
-	}
+    public long getTime() {
+        return time;
+    }
 
-	/**
-	 * HandlerList stuff
-	 */
-	private static final HandlerList handlers = new HandlerList();
+    /**
+     * HandlerList stuff
+     */
+    private static final HandlerList handlers = new HandlerList();
 
-	@Override
-	public HandlerList getHandlers() {
-		return handlers;
-	}
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
 
-	public static HandlerList getHandlerList() {
-		return handlers;
-	}
+    public static HandlerList getHandlerList() {
+        return handlers;
+    }
 
 }

@@ -2,6 +2,6 @@ package mineward.core.achievement;
 
 public interface GameAchievement {
 
-	public String GameName();
+    public String GameName();
 
 }

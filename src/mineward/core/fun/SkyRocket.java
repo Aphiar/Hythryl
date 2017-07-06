@@ -8,13 +8,13 @@ import org.bukkit.entity.Player;
 
 public class SkyRocket extends MyCommand implements Muteable {
 
-	public SkyRocket() {
-		super("vegas", new String[] {}, "Who doesn't love vegas?", Rank.Default);
-	}
+    public SkyRocket() {
+        super("vegas", new String[]{}, "Who doesn't love vegas?", Rank.Default);
+    }
 
-	@Override
-	public void execute(Player p, String[] args) {
+    @Override
+    public void execute(Player p, String[] args) {
 
-	}
+    }
 
 }

@@ -7,13 +7,13 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 
 public class WeatherListener extends MyListener {
 
-	public WeatherListener() {
-		super("NoRain");
-	}
+    public WeatherListener() {
+        super("NoRain");
+    }
 
-	@EventHandler
-	public void onWeatherChange(WeatherChangeEvent e) {
-		e.setCancelled(true);
-	}
+    @EventHandler
+    public void onWeatherChange(WeatherChangeEvent e) {
+        e.setCancelled(true);
+    }
 
 }

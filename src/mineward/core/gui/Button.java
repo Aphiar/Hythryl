@@ -11,64 +11,64 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Button {
 
-	private Inventory inv;
-	private String name;
-	private int place;
-	private String[] lore;
-	private ItemStack is;
+    private Inventory inv;
+    private String name;
+    private int place;
+    private String[] lore;
+    private ItemStack is;
 
-	public Button(Inventory inv, String name, String[] lore, ItemStack is,
-			int place) {
-		ItemMeta meta = is.getItemMeta();
-		meta.setDisplayName(name);
-		List<String> llore = new ArrayList<String>();
-		for (String s : lore) {
-			llore.add(ChatColor.WHITE + s);
-		}
-		meta.setLore(llore);
-		is.setItemMeta(meta);
+    public Button(Inventory inv, String name, String[] lore, ItemStack is,
+                  int place) {
+        ItemMeta meta = is.getItemMeta();
+        meta.setDisplayName(name);
+        List<String> llore = new ArrayList<String>();
+        for (String s : lore) {
+            llore.add(ChatColor.WHITE + s);
+        }
+        meta.setLore(llore);
+        is.setItemMeta(meta);
 
-		this.inv = inv;
-		this.name = name;
-		this.lore = lore;
-		this.is = is;
-		this.place = place;
-	}
+        this.inv = inv;
+        this.name = name;
+        this.lore = lore;
+        this.is = is;
+        this.place = place;
+    }
 
-	public Inventory getInventory() {
-		return inv;
-	}
+    public Inventory getInventory() {
+        return inv;
+    }
 
-	public void setInventory(Inventory inv) {
-		this.inv = inv;
-	}
+    public void setInventory(Inventory inv) {
+        this.inv = inv;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String[] getLore() {
-		return lore;
-	}
+    public String[] getLore() {
+        return lore;
+    }
 
-	public ItemStack getItem() {
-		return is;
-	}
+    public ItemStack getItem() {
+        return is;
+    }
 
-	public void setItem(ItemStack is) {
-		this.is = is;
-	}
+    public void setItem(ItemStack is) {
+        this.is = is;
+    }
 
-	public int getPlace() {
-		return place;
-	}
+    public int getPlace() {
+        return place;
+    }
 
-	public void show() {
-		inv.setItem(getPlace(), getItem());
-	}
+    public void show() {
+        inv.setItem(getPlace(), getItem());
+    }
 
-	public void hide() {
-		inv.setItem(getPlace(), new ItemStack(Material.AIR));
-	}
+    public void hide() {
+        inv.setItem(getPlace(), new ItemStack(Material.AIR));
+    }
 
 }

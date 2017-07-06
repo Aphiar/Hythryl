@@ -1,6 +1,7 @@
 package mineward.core.common.utils;
 
 import mineward.core.common.Database;
+import org.bukkit.entity.Player;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,12 +17,17 @@ public class UtilFilter {
 
             ResultSet res = statement.executeQuery();
             while (res.next()) {
-                words.add(res.getString("word"));
+                words.add(res.getString("word").toUpperCase());
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return words;
+    }
+
+    public static void addWord(Player p, String word) {
+        Database.runUpdateStatement("INSERT INTO Filter(`word`) VALUES ('" + word + "')");
+        F.message(p, "Filter", "Added §e" + word + " §7to the filter!");
     }
 
 }

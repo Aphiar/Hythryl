@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 public class VanishCMD extends MyCommand {
 
     public VanishCMD() {
-        super("vanish", new String[] { "v" }, "Vanish from other players!", Rank.Mod);
+        super("vanish", new String[]{"v"}, "Vanish from other players!", Rank.Mod);
     }
 
     public void execute(Player p, String[] args) {

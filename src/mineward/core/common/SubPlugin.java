@@ -12,55 +12,53 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class SubPlugin {
 
-	private String _name;
-	private Version _ver;
-	private JavaPlugin _main;
+    private String _name;
+    private Version _ver;
+    private JavaPlugin _main;
 
-	public Connection getConnection() {
-		return Database.getConnection();
-	}
+    public Connection getConnection() {
+        return Database.getConnection();
+    }
 
-	public String getName() {
-		return _name;
-	}
+    public String getName() {
+        return _name;
+    }
 
-	public void setName(String name) {
-		this._name = name;
-	}
+    public void setName(String name) {
+        this._name = name;
+    }
 
-	public Version getVersion() {
-		return _ver;
-	}
+    public Version getVersion() {
+        return _ver;
+    }
 
-	public void setVersion(Version ver) {
-		this._ver = ver;
-	}
+    public void setVersion(Version ver) {
+        this._ver = ver;
+    }
 
-	/**
-	 * Use this method only when your main plugin is defined.
-	 * 
-	 * @param cmd
-	 *            An instance of the Command object your class has inherited.
-	 *            Ex. PokemonCMD (if PokemonCMD explicitly inherits MyCommand)
-	 * 
-	 */
-	public void addCommand(MyCommand cmd) {
-		MyFactory.RegisterCommand(cmd, getMainPlugin());
-	}
+    /**
+     * Use this method only when your main plugin is defined.
+     *
+     * @param cmd An instance of the Command object your class has inherited.
+     *            Ex. PokemonCMD (if PokemonCMD explicitly inherits MyCommand)
+     */
+    public void addCommand(MyCommand cmd) {
+        MyFactory.RegisterCommand(cmd, getMainPlugin());
+    }
 
-	public void addListener(MyListener listener) {
-		MyFactory.RegisterListener(listener, getMainPlugin());
-	}
+    public void addListener(MyListener listener) {
+        MyFactory.RegisterListener(listener, getMainPlugin());
+    }
 
-	public JavaPlugin getMainPlugin() {
-		return _main;
-	}
+    public JavaPlugin getMainPlugin() {
+        return _main;
+    }
 
-	public void enableMe(JavaPlugin main, String name) {
-		Core.registerSubPlugin(this);
-		this._main = main;
-		this._name = name;
-		UtilConsoleLog.Log("Module", "Module " + name + " has been enabled!");
-	}
+    public void enableMe(JavaPlugin main, String name) {
+        Core.registerSubPlugin(this);
+        this._main = main;
+        this._name = name;
+        UtilConsoleLog.Log("Module", "Module " + name + " has been enabled!");
+    }
 
 }

@@ -13,58 +13,58 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Cooldown {
 
-	private static JavaPlugin plugin;
+    private static JavaPlugin plugin;
 
-	public static void Enable(JavaPlugin plugin) {
-		Cooldown.plugin = plugin;
-	}
+    public static void Enable(JavaPlugin plugin) {
+        Cooldown.plugin = plugin;
+    }
 
-	public static List<CooldownToken> tokens = new ArrayList<CooldownToken>();
+    public static List<CooldownToken> tokens = new ArrayList<CooldownToken>();
 
-	public static void CancelCooldown(String cfor, String data) {
-		CooldownToken token = null;
-		for (CooldownToken t : tokens) {
-			if (t.Coolfor.equals(cfor) && t.Data.equals(data)) {
-				token = t;
-			}
-		}
-		if (token == null)
-			return;
-		tokens.remove(token);
-	}
+    public static void CancelCooldown(String cfor, String data) {
+        CooldownToken token = null;
+        for (CooldownToken t : tokens) {
+            if (t.Coolfor.equals(cfor) && t.Data.equals(data)) {
+                token = t;
+            }
+        }
+        if (token == null)
+            return;
+        tokens.remove(token);
+    }
 
-	@SuppressWarnings("deprecation")
-	public static boolean Cool(final String cfor, final String data,
-			final long time) {
-		long ctime = System.currentTimeMillis();
-		for (CooldownToken tkn : tokens) {
-			if (tkn.Coolfor.equals(cfor) && tkn.Data.equals(data)) {
-				long until = (tkn.StartTime + tkn.Time);
-				if (until > ctime) {
-					OfflinePlayer op = Bukkit.getOfflinePlayer(cfor);
-					if (op.isOnline())
-						F.message(op.getPlayer(), "Cooldown",
-								"You can't use " + C.STR_ELEMENT + tkn.Data
-										+ C.STR_MAIN + " for " + C.STR_ELEMENT
-										+ TimeUtil.toString(until - ctime)
-										+ C.STR_MAIN + ".");
-					return true;
-				}
-			}
-		}
-		CooldownToken tkn = new CooldownToken(time, ctime, data, cfor);
-		tokens.add(tkn);
-		Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-			public void run() {
-				OfflinePlayer op = Bukkit.getOfflinePlayer(cfor);
-				Bukkit.getPluginManager().callEvent(
-						new CooldownFinishEvent(cfor, data, time));
-				if (op.isOnline())
-					F.message(op.getPlayer(), "Cooldown", "You can use "
-							+ C.STR_ELEMENT + data + C.STR_MAIN + " again.");
-			}
-		}, (20L * (time / 1000)));
-		return false;
-	}
+    @SuppressWarnings("deprecation")
+    public static boolean Cool(final String cfor, final String data,
+                               final long time) {
+        long ctime = System.currentTimeMillis();
+        for (CooldownToken tkn : tokens) {
+            if (tkn.Coolfor.equals(cfor) && tkn.Data.equals(data)) {
+                long until = (tkn.StartTime + tkn.Time);
+                if (until > ctime) {
+                    OfflinePlayer op = Bukkit.getOfflinePlayer(cfor);
+                    if (op.isOnline())
+                        F.message(op.getPlayer(), "Cooldown",
+                                "You can't use " + C.STR_ELEMENT + tkn.Data
+                                        + C.STR_MAIN + " for " + C.STR_ELEMENT
+                                        + TimeUtil.toString(until - ctime)
+                                        + C.STR_MAIN + ".");
+                    return true;
+                }
+            }
+        }
+        CooldownToken tkn = new CooldownToken(time, ctime, data, cfor);
+        tokens.add(tkn);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+            public void run() {
+                OfflinePlayer op = Bukkit.getOfflinePlayer(cfor);
+                Bukkit.getPluginManager().callEvent(
+                        new CooldownFinishEvent(cfor, data, time));
+                if (op.isOnline())
+                    F.message(op.getPlayer(), "Cooldown", "You can use "
+                            + C.STR_ELEMENT + data + C.STR_MAIN + " again.");
+            }
+        }, (20L * (time / 1000)));
+        return false;
+    }
 
 }
